@@ -9,16 +9,26 @@ import Drawers from "./Drawers";
 import useAuth from "../hooks/useAuth";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/user/userApi";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const auth = useAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
     setAnchorEl(null);
   };
 
@@ -35,7 +45,9 @@ const Navbar = () => {
           Cavalier
         </Typography>
         {!auth.isLoggedIn ? (
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={() => navigate("/login")}>
+            Login
+          </Button>
         ) : (
           <div>
             <IconButton
@@ -65,6 +77,7 @@ const Navbar = () => {
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleLogout}>Log out</MenuItem>
             </Menu>
           </div>
         )}

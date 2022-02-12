@@ -25,7 +25,7 @@ export const loginSlice = createSlice({
         state.surname = action.payload.data.surname;
         state.isAdmin = action.payload.data.isAdmin;
         state.isLoggedIn = true;
-        state.token = action.payload.data._id;
+        state.token = action.payload.data.accessToken;
       } else {
         return initialState;
       }
@@ -36,6 +36,7 @@ export const loginSlice = createSlice({
     });
 
     builder.addCase(logout, () => {
+      localStorage.removeItem("accessToken");
       return initialState;
     });
   },

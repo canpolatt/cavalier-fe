@@ -1,23 +1,156 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/user/userApi";
+import TextField from "@mui/material/TextField";
+import { Button, Checkbox, IconButton, InputAdornment } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import "../styles/SignIn.css";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Navigate, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const [open, setOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [toastObj, setToastObj] = useState({
+    severity: "success",
+    message: "None",
+  });
+  const vertical = "bottom";
+  const horizontal = "center";
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  const handleClick = () => {
-    const data = {
-      email: "canpolatt@yahoo.com",
-      password: "can12345",
-    };
-    const response = dispatch(login(data));
-    console.log(response);
+  //Validation schema
+  const validate = Yup.object({
+    email: Yup.string().email("Invalid email").required("Email required"),
+    password: Yup.string()
+      .min(4, "Invalid Password")
+      .max(16, "Invalid Password")
+      .required("Password required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validate,
+    onSubmit: async (values) => {
+      const response = await dispatch(login(values));
+
+      if (response.payload.status) {
+        setToastObj({
+          severity: "success",
+          message: "Başarıyla giriş yapıldı",
+        });
+        setOpen(true);
+        if (loggedIn) {
+          localStorage.setItem(
+            "accessToken",
+            response.payload.data.accessToken
+          );
+        }
+
+        navigate("/");
+      } else {
+        setOpen(true);
+        setToastObj({ severity: "error", message: response.payload });
+      }
+    },
+    validateOnChange: false,
+    validateOnBlur: false,
+  });
+
+  //Set formik values
+  const setInputValue = (key, value) => {
+    formik.setValues({
+      ...formik.values,
+      [key]: value,
+    });
   };
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleCheck = () => {
+    setLoggedIn(!loggedIn);
+  };
+
+  if (auth.isLoggedIn && localStorage.getItem("accessToken")) {
+    return <Navigate to={"/"} />;
+  }
+
   return (
-    <div>
-      <button onClick={handleClick}>Gonder</button>
-    </div>
+    <>
+      <div className="form-wrapper">
+        <h2>Cavalier Mobilya</h2>
+        <form className="form" onSubmit={formik.handleSubmit}>
+          <TextField
+            error={Object.keys(formik.errors).length > 0}
+            id="outlined-error-helper-text-1"
+            value={formik.values.email}
+            label="Email"
+            onChange={(e) => setInputValue("email", e.target.value)}
+            helperText={formik.errors.email}
+          />
+          <TextField
+            error={Object.keys(formik.errors).length > 0}
+            id="outlined-error-helper-text-2"
+            value={formik.values.password}
+            label="Password"
+            type={showPassword ? "text" : "password"}
+            onChange={(e) => setInputValue("password", e.target.value)}
+            helperText={formik.errors.password}
+            InputProps={{
+              // <-- This is where the toggle button is added.
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <div className="logged-in">
+            <Checkbox checked={loggedIn} onChange={handleCheck} />
+            <p>Remember me</p>
+          </div>
+
+          <Button type="submit" variant="contained">
+            Log In
+          </Button>
+        </form>
+      </div>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        key={vertical + horizontal}
+      >
+        <Alert onClose={handleClose} severity={toastObj.severity}>
+          {toastObj.message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 
