@@ -1,11 +1,41 @@
-import { Button } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AppLayout from "./layout/AppLayout";
+import LoginLayout from "./layout/LoginLayout";
+import About from "./pages/About";
+import AdminPanel from "./pages/AdminPanel";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Page401 from "./pages/Page401";
+import Products from "./pages/Products";
+import SignIn from "./pages/SignIn";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Button variant="contained">Contained</Button>
-    </div>
+    <>
+      <Routes>
+        <Route element={<LoginLayout />}>
+          <Route path="/signin" element={<SignIn />} />
+        </Route>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="products" element={<Products />} />
+          <Route
+            path="panel"
+            element={
+              <ProtectedRoute
+                children={<AdminPanel />}
+                permittedRoles={["ADMIN"]}
+              />
+            }
+          />
+          <Route path="401" element={<Page401 />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
