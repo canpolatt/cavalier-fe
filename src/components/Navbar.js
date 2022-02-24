@@ -12,6 +12,7 @@ import Menu from "@mui/material/Menu";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/user/userApi";
 import { useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -33,11 +34,16 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" style={{}}>
+    <AppBar position="static" className="header">
       <Toolbar>
         <Drawers />
         <Typography
-          style={{ textAlign: "center" }}
+          style={{
+            textAlign: "center",
+            color: "#000",
+            fontSize: "1.5em",
+            fontWeight: "700",
+          }}
           variant="h6"
           component="div"
           sx={{ flexGrow: 1 }}
@@ -45,7 +51,10 @@ const Navbar = () => {
           Cavalier
         </Typography>
         {!auth.isLoggedIn ? (
-          <Button color="inherit" onClick={() => navigate("/login")}>
+          <Button
+            className="cavalier-btn-default"
+            onClick={() => navigate("/login")}
+          >
             Login
           </Button>
         ) : (
@@ -57,7 +66,9 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
+              className="profile-wrapper"
             >
+              <p> {auth.name}</p>
               <AccountCircle />
             </IconButton>
             <Menu

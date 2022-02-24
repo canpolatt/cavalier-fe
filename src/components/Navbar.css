@@ -1,0 +1,19 @@
+.header {
+  background-color: white !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid gainsboro;
+}
+
+.header svg {
+  fill: #000;
+}
+
+.header p {
+  color: #000 !important;
+}
+
+.profile-wrapper > p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-right: 5px;
+}

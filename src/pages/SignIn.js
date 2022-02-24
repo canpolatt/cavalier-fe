@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/user/userApi";
+
 import TextField from "@mui/material/TextField";
 import { Button, Checkbox, IconButton, InputAdornment } from "@mui/material";
 import Alert from "@mui/material/Alert";
@@ -11,9 +11,9 @@ import "../styles/SignIn.css";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { login } from "../redux/user/userApi";
 
 const SignIn = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useAuth();
   const [open, setOpen] = useState(false);
@@ -27,6 +27,7 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const dispatch = useDispatch();
 
   //Validation schema
   const validate = Yup.object({
@@ -134,7 +135,7 @@ const SignIn = () => {
             <p>Remember me</p>
           </div>
 
-          <Button type="submit" variant="contained">
+          <Button type="submit" className="cavalier-btn-primary">
             Log In
           </Button>
         </form>
