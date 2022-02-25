@@ -60,7 +60,7 @@ const Home = () => {
           >
             <p>Products</p>
           </Grid>
-          {products.map((item, idx) => (
+          {products?.map((item, idx) => (
             <Grid item xs={12} md={4} className="mb-4 text-center" key={idx}>
               <img
                 className="w-full h-full object-cover hover:brightness-75 hover:cursor-pointer"

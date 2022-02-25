@@ -50,6 +50,7 @@ const Navbar = () => {
         >
           Cavalier
         </Typography>
+        {}
         {!auth.isLoggedIn ? (
           <Button
             className="cavalier-btn-default"
@@ -58,7 +59,15 @@ const Navbar = () => {
             Login
           </Button>
         ) : (
-          <div>
+          <div className="flex items-center">
+            {auth.isAdmin && (
+              <Button
+                className="cavalier-btn-default"
+                onClick={() => navigate("/panel")}
+              >
+                Admin Panel
+              </Button>
+            )}
             <IconButton
               size="large"
               aria-label="account of current user"
