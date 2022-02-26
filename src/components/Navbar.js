@@ -35,9 +35,12 @@ const Navbar = () => {
 
   return (
     <AppBar position="static" className="header">
-      <Toolbar>
-        <Drawers />
+      <Toolbar className="flex">
+        <div className="flex-1">
+          <Drawers />
+        </div>
         <Typography
+          className="flex-1"
           style={{
             textAlign: "center",
             color: "#000",
@@ -52,14 +55,16 @@ const Navbar = () => {
         </Typography>
         {}
         {!auth.isLoggedIn ? (
-          <Button
-            className="cavalier-btn-default"
-            onClick={() => navigate("/login")}
-          >
-            Login
-          </Button>
+          <div className="flex-1 flex justify-end">
+            <Button
+              className="cavalier-btn-default"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </Button>
+          </div>
         ) : (
-          <div className="flex items-center">
+          <div className="flex-1 flex items-center justify-end">
             {auth.isAdmin && (
               <Button
                 className="cavalier-btn-default"
