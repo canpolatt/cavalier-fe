@@ -1,6 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
+}
+
+.cavalier-btn-default {
+  @apply bg-transparent text-black !important;
+}
+.cavalier-btn-primary {
+  background-color: #ba9a8e !important;
+  background-image: linear-gradient(315deg, #ba9a8e 0%, #96705b 74%) !important;
+  color: white !important;
+  /* @apply bg-red-400 text-white !important; */
 }
