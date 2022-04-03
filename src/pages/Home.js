@@ -10,6 +10,7 @@ import "swiper/css";
 import SliderImage1 from "../assets/009A3717.jpg";
 import SliderImage2 from "../assets/009A3541.JPG";
 import SliderImage3 from "../assets/009A3144.jpg";
+import Categories from "../components/Categories";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -22,7 +23,7 @@ const Home = () => {
 
   return (
     <>
-      <Container maxWidth="lg" className="mt-8  ">
+      <Container maxWidth="lg" className="pt-8">
         <Swiper
           id="swiper"
           modules={[Autoplay]}
@@ -40,6 +41,7 @@ const Home = () => {
             <img src={SliderImage3} alt={SliderImage3} />
           </SwiperSlide>
         </Swiper>
+        <Categories />
         <Grid item xs={12} md={12}>
           <img
             className="mx-auto "
@@ -58,6 +60,7 @@ const Home = () => {
           >
             <p style={{ textAlign: "center" }}>About Us</p>
           </Grid>
+
           <Grid flexDirection={"row"} className="md:mx-40" item xs={12} md={12}>
             <p>
               Cavalier is a Cape Town based interior design studio. We are

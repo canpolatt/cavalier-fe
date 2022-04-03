@@ -9,7 +9,6 @@ import NotFound from "./pages/NotFound";
 import Page401 from "./pages/Page401";
 import Products from "./pages/Products";
 import SignIn from "./pages/SignIn";
-import Categories from "./components/Categories";
 
 const App = () => {
   return (
