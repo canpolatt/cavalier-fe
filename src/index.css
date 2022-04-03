@@ -13,8 +13,7 @@
   @apply bg-transparent text-black !important;
 }
 .cavalier-btn-primary {
-  background-color: #ba9a8e !important;
-  background-image: linear-gradient(315deg, #ba9a8e 0%, #96705b 74%) !important;
+  background-color: #2563eb!important;
   color: white !important;
   /* @apply bg-red-400 text-white !important; */
 }

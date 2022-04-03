@@ -3,7 +3,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import Drawers from "./Drawers";
 import useAuth from "../hooks/useAuth";
@@ -12,6 +11,9 @@ import Menu from "@mui/material/Menu";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/user/userApi";
 import { useNavigate } from "react-router-dom";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import Badge from "@mui/material/Badge";
+import MailIcon from "@mui/icons-material/Mail";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -66,12 +68,22 @@ const Navbar = () => {
         ) : (
           <div className="flex-1 flex items-center justify-end">
             {auth.isAdmin && (
-              <Button
-                className="cavalier-btn-default"
-                onClick={() => navigate("/panel")}
-              >
-                Admin Panel
-              </Button>
+              <div className="flex items-center gap-x-2">
+                <Badge
+                  badgeContent={4}
+                  color="error"
+                  onClick={() => navigate("/messages")}
+                  className="hover:cursor-pointer"
+                >
+                  <MailIcon color="action" />
+                </Badge>
+                <Button
+                  className="cavalier-btn-default font-bold"
+                  onClick={() => navigate("/panel")}
+                >
+                  <AssessmentIcon />
+                </Button>
+              </div>
             )}
             <IconButton
               size="large"
@@ -80,10 +92,9 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
-              className="profile-wrapper"
+              className="profile-wrapper text-base"
             >
               <p> {auth.name}</p>
-              <AccountCircle />
             </IconButton>
             <Menu
               id="menu-appbar"
