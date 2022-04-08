@@ -20,8 +20,6 @@ const Categories = ({slidesPerView}) => {
       modules={[Autoplay]}
       autoplay={{ delay: 5000 }}
       slidesPerView={slidesPerView}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={(e) => console.log(e)}
     >
       {categories?.map((category, idx) => (
         <SwiperSlide key={idx} className="flex flex-col items-center gap-y-1 py-8">
