@@ -41,7 +41,7 @@ const Home = () => {
             <img src={SliderImage3} alt={SliderImage3} />
           </SwiperSlide>
         </Swiper>
-        <Categories />
+        <Categories slidesPerView={3}/>
         <Grid item xs={12} md={12}>
           <img
             className="mx-auto "
