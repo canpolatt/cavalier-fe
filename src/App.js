@@ -5,6 +5,7 @@ import LoginLayout from "./layout/LoginLayout";
 import About from "./pages/About";
 import AdminPanel from "./pages/AdminPanel";
 import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 import Page401 from "./pages/Page401";
 import Products from "./pages/Products";
@@ -21,6 +22,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="products" element={<Products />} />
+          <Route path="products/:product_id" element={<ProductDetail/>}/>
           <Route
             path="panel"
             element={
