@@ -14,10 +14,10 @@ const Products = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex-1">
       <Categories slidesPerView={5} />
-      <div className="p-4">
-        <input type="text" placeholder="search.." className="border p-2 mb-2 w-full" />
+      <div className="p-4 lg:flex lg:px-24 items-center justify-between">
+        <input type="text" placeholder="search.." className="border p-2 mb-2 w-full lg:w-1/4" />
         <div className="flex items-center justify-center gap-2">
           <LoadingButton loading variant="outlined" className="flex-1">
             Submit
@@ -32,7 +32,7 @@ const Products = () => {
           <ProductCard key={idx} item={item} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
