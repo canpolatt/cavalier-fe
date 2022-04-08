@@ -1,8 +1,16 @@
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ item }) => {
+
+  const navigate = useNavigate();
+
+  const handleClick = (id) => {
+    navigate(`/products/${id}`);
+  }
+
   return (
-    <div className="shadow-md rounded-lg handle--child-visibility flex  flex-col">
+    <div onClick={()=>handleClick(item._id)} className="shadow-md rounded-lg handle--child-visibility flex flex-col">
       <div className="relative">
         <img
           className="w-full p-2 h-48 object-cover"
