@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 
-const Categories = () => {
+const Categories = ({slidesPerView}) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Categories = () => {
     <Swiper
       modules={[Autoplay]}
       autoplay={{ delay: 5000 }}
-      slidesPerView={3}
+      slidesPerView={slidesPerView}
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={(e) => console.log(e)}
     >
@@ -28,9 +28,9 @@ const Categories = () => {
           <img
             src={category.image + ".jpeg"}
             alt={idx}
-            className="w-24 h-24 rounded-full border border-gray-200 hover:brightness-90 hover:cursor-pointer"
+            className="w-12 h-12 md:w-24 md:h-24 rounded-full border border-gray-200 hover:brightness-90 hover:cursor-pointer"
           />
-          <h4 className="text-center text-slate-600">{category.name}</h4>
+          <h4 className="text-center text-slate-600 text-xs md:text-md">{category.name}</h4>
         </SwiperSlide>
       ))}
     </Swiper>

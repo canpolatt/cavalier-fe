@@ -13,7 +13,15 @@
   @apply bg-transparent text-black !important;
 }
 .cavalier-btn-primary {
-  background-color: #2563eb!important;
+  background-color: #2563eb !important;
   color: white !important;
   /* @apply bg-red-400 text-white !important; */
+}
+
+.handle--child-visibility:hover .child {
+  display: initial;
+}
+
+.child{
+  display:none;
 }
