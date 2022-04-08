@@ -23,8 +23,8 @@ const Categories = ({slidesPerView}) => {
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={(e) => console.log(e)}
     >
-      {categories.map((category, idx) => (
-        <SwiperSlide className="flex flex-col items-center gap-y-1 py-8">
+      {categories?.map((category, idx) => (
+        <SwiperSlide key={idx} className="flex flex-col items-center gap-y-1 py-8">
           <img
             src={category.image + ".jpeg"}
             alt={idx}
