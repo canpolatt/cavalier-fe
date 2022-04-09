@@ -1,21 +1,30 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { findProduct } from "../api/productDetailApi";
 
 const ProductDetail = () => {
   const { product_id } = useParams();
-  const [detail, setDetail] = useState([]);
+  const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      await axios
-        .get(process.env.REACT_APP_BASE_URL + "/api/products/find/" + product_id)
-        .then((res) => res.data)
-        .then((res) => setDetail(res))
-    })();
+    findProduct(product_id).then((res) => setDetails(res));
   }, [product_id]);
 
-  return <div>{JSON.stringify(detail)}</div>;
+  return (
+    <div>
+      <h3>{details.title}</h3>
+      <p>{details.description}</p>
+      <img className="object-cover max-w-xs" src={details.image} alt={details._id} />
+      <ul>
+        {details?.categories?.map((item, idx) => (
+          <li key={idx}>{item}</li>
+        ))}
+      </ul>
+      <ul>
+
+      </ul>
+    </div>
+  );
 };
 
 export default ProductDetail;

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Categories from "../components/Categories";
 import LoadingButton from "@mui/lab/LoadingButton";
 
+
 const Products = () => {
   const [data, setData] = useState([]);
 

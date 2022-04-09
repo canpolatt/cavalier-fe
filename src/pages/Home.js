@@ -28,8 +28,6 @@ const Home = () => {
           id="swiper"
           modules={[Autoplay]}
           autoplay={{ delay: 2500 }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={(e) => console.log(e)}
         >
           <SwiperSlide>
             <img src={SliderImage1} alt={SliderImage1} />
