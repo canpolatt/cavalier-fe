@@ -14,7 +14,7 @@ const ProductDetail = () => {
     <div>
       <h3>{details.title}</h3>
       <p>{details.description}</p>
-      <img src={details.image} alt={details._id} />
+      <img className="object-cover max-w-xs" src={details.image} alt={details._id} />
       <ul>
         {details?.categories?.map((item, idx) => (
           <li key={idx}>{item}</li>
