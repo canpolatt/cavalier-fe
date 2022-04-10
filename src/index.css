@@ -9,6 +9,11 @@
   padding: 0;
 }
 
+body{
+  display:flex;
+  flex-direction:column;
+}
+
 .cavalier-btn-default {
   @apply bg-transparent text-black !important;
 }

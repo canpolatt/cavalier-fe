@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       gridTemplateColumns:{
         'auto-fit': 'repeat(auto-fit,minmax(280, 1fr))'
+      },
+      flex:{
+        '2':'2 2 0%'
       }
     },
   },
