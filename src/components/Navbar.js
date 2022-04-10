@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
+import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -38,13 +39,12 @@ const Navbar = () => {
   return (
     <AppBar position="static" className="header">
       <Toolbar className="flex">
-        <div className="flex-1">
-          <Drawers />
+        <div className="absolute lg:relative lg:flex-1">
+          <Drawers/>
         </div>
         <Typography
-          className="flex-1"
+          className="lg:flex-1 lg:text-center ml-7 lg:ml-0"
           style={{
-            textAlign: "center",
             color: "#000",
             fontSize: "1.5em",
             fontWeight: "700",
@@ -58,6 +58,15 @@ const Navbar = () => {
         {}
         {!auth.isLoggedIn ? (
           <div className="flex-1 flex justify-end">
+            <div className="flex items-center justify-center">
+            <Badge
+              badgeContent={4}
+              color="error"
+              className="hover:cursor-pointer"
+            >
+              <LocalGroceryStoreIcon color="action" />
+            </Badge>
+            </div>
             <Button
               className="cavalier-btn-default"
               onClick={() => navigate("/login")}
@@ -85,6 +94,13 @@ const Navbar = () => {
                 </Button>
               </div>
             )}
+            <Badge
+              badgeContent={4}
+              color="error"
+              className="hover:cursor-pointer mr-4"
+            >
+              <LocalGroceryStoreIcon color="action" />
+            </Badge>
             <IconButton
               size="large"
               aria-label="account of current user"
