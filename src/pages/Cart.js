@@ -3,12 +3,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.products);
-  const total = useSelector((state) => state.cart.total);
-  const quantity = useSelector((state) => state.cart.quantity);
+  
+  /*
+    const total = useSelector((state) => state.cart.total);
+    const quantity = useSelector((state) => state.cart.quantity);
+  */
 
   return (
     <div className="flex-1 flex flex-col lg:flex-row ">
-    {console.log(cartItems)}
       <ul className="p-2 lg:p-8 flex-1">
         {cartItems?.map((item, idx) => {
           return (
