@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import Page401 from "./pages/Page401";
 import Products from "./pages/Products";
 import SignIn from "./pages/SignIn";
+import Cart from "./pages/Cart";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="about" element={<About />} />
           <Route path="products" element={<Products />} />
           <Route path="products/:product_id" element={<ProductDetail/>}/>
+          <Route path="cart" element={<Cart />} />
           <Route
             path="panel"
             element={

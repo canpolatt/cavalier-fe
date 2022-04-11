@@ -22,15 +22,3 @@ body{
   color: white !important;
   /* @apply bg-red-400 text-white !important; */
 }
-
-.handle--child-visibility{
-  cursor:pointer;
-}
-
-.handle--child-visibility:hover .child {
-  display: initial;
-}
-
-.child{
-  display:none;
-}

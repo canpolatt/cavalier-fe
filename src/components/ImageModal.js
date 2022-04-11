@@ -1,9 +1,6 @@
 import "./ImageModal.css";
 
-const ImageModal = (props) => {
-
-  console.log("BEN RENDER OLDUM")  
-  
+const ImageModal = (props) => {  
   return (
     <div id="image--modal-id" className="image--modal">
       <span onClick={()=>props.setImageModalVisibility(false)} className="close--image-modal">&times;</span>

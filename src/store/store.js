@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import userSlice from "../redux/user/userSlice";
-import loadingSlice from "../redux/loading/loadingSlice"
+import loadingSlice from "../redux/loading/loadingSlice";
+import cartSlice from "../redux/shoppingCart/shoppingCartSlice";
 import { persistCombineReducers } from "redux-persist";
 
 
@@ -18,6 +19,7 @@ export const store = configureStore({
     persist: persistedReducer,
     user: userSlice,
     loading: loadingSlice,
+    cart: cartSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

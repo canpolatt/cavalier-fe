@@ -15,6 +15,7 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
+import {useSelector} from "react-redux";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -22,6 +23,7 @@ const Navbar = () => {
   const auth = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cartQuantity = useSelector((state) => state.cart.quantity);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -60,11 +62,11 @@ const Navbar = () => {
           <div className="flex-1 flex justify-end">
             <div className="flex items-center justify-center">
             <Badge
-              badgeContent={4}
+              badgeContent={cartQuantity}
               color="error"
               className="hover:cursor-pointer"
             >
-              <LocalGroceryStoreIcon color="action" />
+              <LocalGroceryStoreIcon color="action" onClick={()=>navigate("cart")}/>
             </Badge>
             </div>
             <Button
@@ -95,11 +97,11 @@ const Navbar = () => {
               </div>
             )}
             <Badge
-              badgeContent={4}
+              badgeContent={cartQuantity}
               color="error"
               className="hover:cursor-pointer mr-4"
             >
-              <LocalGroceryStoreIcon color="action" />
+              <LocalGroceryStoreIcon color="action" onClick={()=>navigate("cart")} />
             </Badge>
             <IconButton
               size="large"

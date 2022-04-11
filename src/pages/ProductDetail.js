@@ -46,7 +46,7 @@ const ProductDetail = () => {
                   </li>
                 ))}
               </ul>
-              <p className="py-1">{details.brand}</p>
+              <p className="py-1">Marka : {details.brand}</p>
               <p className="py-1">Stok adedi : {details.stock}</p>
               <p className="py-1">{details.inStock && "Stok durumu : var"}</p>
               <ul className="flex items-center py-2">

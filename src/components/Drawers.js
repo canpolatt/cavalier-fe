@@ -51,7 +51,7 @@ const Drawers = () => {
           <ListItemIcon>
             <ChairIcon />
           </ListItemIcon>
-          <ListItemText primary="Products" />
+          <ListItemText primary="Ürünler" />
         </ListItem>
       </List>
       <Divider />
