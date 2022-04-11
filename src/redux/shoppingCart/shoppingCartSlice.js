@@ -8,7 +8,7 @@ const cartSlice = createSlice({
         total:0,
     },
     reducers:{
-        addCart:(state,action)=>{
+        addCart:( state,action )=>{
             const findProduct = state.products.find(product=>product._id === action.payload._id);
             if(findProduct){
                 const findIndex = state.products.indexOf(findProduct);
