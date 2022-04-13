@@ -4,6 +4,7 @@ import { findProduct } from "../api/productDetailApi";
 import Loading from "../components/Loading";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsLoading } from "../redux/loading/loadingSlice";
+import { colors } from "../utils/colors";
 
 const ProductDetail = () => {
   const { product_id } = useParams();
@@ -12,7 +13,7 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setIsLoading("pending"))
+    dispatch(setIsLoading("pending"));
     findProduct(product_id)
       .then((res) => setDetails(res))
       .finally(() => dispatch(setIsLoading("fulfilled")));
@@ -53,7 +54,7 @@ const ProductDetail = () => {
                 <label>Renk Seçenekleri:</label>
                 {details?.color?.map((item, idx) => (
                   <li
-                    className={`bg-${item}-100 rounded-full border-2 w-8 h-8 ml-2`}
+                    className={`${colors[item]} rounded-full border-2 w-8 h-8 ml-2`}
                     key={idx}
                   ></li>
                 ))}

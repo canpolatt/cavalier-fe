@@ -11,6 +11,7 @@ import Page401 from "./pages/Page401";
 import Products from "./pages/Products";
 import SignIn from "./pages/SignIn";
 import Cart from "./pages/Cart";
+import Order from "./pages/Order";
 
 const App = () => {
   return (
@@ -23,8 +24,9 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="products" element={<Products />} />
-          <Route path="products/:product_id" element={<ProductDetail/>}/>
+          <Route path="products/:product_id" element={<ProductDetail />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="order" element={<Order />} />
           <Route
             path="panel"
             element={
