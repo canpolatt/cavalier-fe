@@ -5,9 +5,10 @@ import { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/shoppingCart/shoppingCartSlice";
+import * as Yup from "yup";
+import { useFormik } from "formik";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { colors } from "../utils/colors";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { ProductObj } from "../utils/productObj";
@@ -32,26 +33,41 @@ const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
-  const [size, setSize] = useState("");
-  const [color, setColor] = useState("");
 
   const handleOpen = () => {
-    setColor("");
-    setSize("");
+    formik.setValues({
+      size: "",
+      color: "",
+    });
     setOpen(true);
   };
 
-  const handleAddToCart = () => {
-    addToCart();
-    setOpen(false);
-  }
+  //Validation schema
+  const validate = Yup.object({
+    size: Yup.string().required("Size required"),
+    color: Yup.string().required("Color required"),
+  });
 
-  const handleChange = (event) => {
-    setSize(event.target.value);
-  };
+  const formik = useFormik({
+    initialValues: {
+      size: "",
+      color: "",
+    },
+    validationSchema: validate,
+    onSubmit: () => {
+      addToCart();
+      setOpen(false);
+    },
+    validateOnChange: false,
+    validateOnBlur: false,
+  });
 
-  const handleColor = (item) => {
-    setColor(item);
+  //Set formik values
+  const setInputValue = (key, value) => {
+    formik.setValues({
+      ...formik.values,
+      [key]: value,
+    });
   };
 
   const handleClick = (id) => {
@@ -59,7 +75,16 @@ const ProductCard = ({ item }) => {
   };
 
   const addToCart = () => {
-    const obj = new ProductObj(color, size, 1, item._id, item.price, item.image, item.description, item.title);
+    const obj = new ProductObj(
+      formik.values.color,
+      formik.values.size,
+      1,
+      item._id,
+      item.price,
+      item.image,
+      item.description,
+      item.title
+    );
     dispatch(addCart({ ...obj }));
   };
 
@@ -76,49 +101,73 @@ const ProductCard = ({ item }) => {
         className={"flex flex-col gap-y-4"}
       >
         <Box sx={style}>
-          <span className="flex flex-col gap-y-2">
-            <ul className="flex items-center py-2">
-              <label>Renk Seçenekleri:</label>
-              {item?.color?.map((item, idx) => (
-                <li
-                  className={`${
-                    colors[item]
-                  } rounded-full  w-8 h-8 ml-2 hover:cursor-pointer ${
-                    color === item ? "border-2 border-slate-600" : ""
-                  }`}
-                  key={idx}
-                  onClick={() => handleColor(item)}
-                ></li>
-              ))}
-            </ul>
-          </span>
+          <form onSubmit={formik.handleSubmit}>
+            <span className="flex flex-col gap-y-2">
+              <ul className="flex items-center py-2">
+                <label>Renk Seçenekleri:</label>
+                {item?.color?.map((item, idx) => (
+                  <li
+                    className={` rounded-full  w-8 h-8 ml-2 hover:cursor-pointer ${
+                      formik.values.color === item
+                        ? "border-2 border-slate-600"
+                        : ""
+                    }`}
+                    value={item}
+                    style={{ backgroundColor: `${item}` }}
+                    key={idx}
+                    onClick={() => setInputValue("color", item)}
+                  ></li>
+                ))}
+              </ul>
+              <small className=" text-red-400 font-semibold">
+                {formik.errors.color}
+              </small>
+            </span>
 
-          <span className="flex flex-col gap-y-2">
-            <h1>Boyutlar</h1>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              className="w-full"
-              value={size}
-              onChange={handleChange}
+            <span className="flex flex-col gap-y-2 mt-4">
+              <h1>Boyutlar</h1>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                className="w-full"
+                value={formik.values.size}
+                onChange={(e) => setInputValue("size", e.target.value)}
+              >
+                {item?.size?.map((item, idx) => (
+                  <MenuItem
+                    value={
+                      item.name +
+                      " - " +
+                      item.height +
+                      " x " +
+                      item.width +
+                      " " +
+                      item.depth
+                    }
+                    id={idx}
+                    key={idx}
+                  >
+                    {item.name +
+                      " - " +
+                      item.height +
+                      " x " +
+                      item.width +
+                      " " +
+                      item.depth}
+                  </MenuItem>
+                ))}
+              </Select>
+              <small className="text-red-400 font-semibold">
+                {formik.errors.size}
+              </small>
+            </span>
+            <button
+              className="mt-4 w-full rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
+              type="submit"
             >
-              {item?.size?.map((item, idx) => (
-                <MenuItem
-                  value={item.height + " x " + item.width + " " + item.depth}
-                  id={idx}
-                  key={idx}
-                >
-                  {item.height + " x " + item.width + " " + item.depth}
-                </MenuItem>
-              ))}
-            </Select>
-          </span>
-          <button
-            className="mt-4 w-full rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
-            onClick={handleAddToCart}
-          >
-            Sepete ekle
-          </button>
+              Sepete ekle
+            </button>
+          </form>
         </Box>
       </Modal>
       <div className="md:max-w-xs lg:w-96 shadow-md rounded-lg handle--child-visibility flex flex-col cursor-pointer">
