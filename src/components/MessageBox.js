@@ -49,9 +49,9 @@ const MessageBox = () => {
   };
   return (
     <div className="p-8 flex flex-col">
-      <p className="text-center text-xl md:text-2xl lg:text-3xl my-4">
+      <h2 className="text-center text-xl mb-8 md:text-2xl lg:text-4xl my-4">
         Biz Size Ulaşalım
-      </p>
+      </h2>
       <form
         onSubmit={formik.handleSubmit}
         className="p-8 flex flex-col gap-4 border"

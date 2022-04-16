@@ -46,7 +46,8 @@ const Home = () => {
               <img src={SliderImage3} alt={SliderImage3} />
             </SwiperSlide>
           </Swiper>
-          <Categories slidesPerView={3} />
+          <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">Kategoriler</h2>
+          <Categories slidesPerView={3}/>
           <Grid item xs={12} md={12}>
             <img
               className="mx-auto "
@@ -63,7 +64,7 @@ const Home = () => {
               md={12}
               style={{ textAlign: "center" }}
             >
-              <p style={{ textAlign: "center" }}>About Us</p>
+              <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">About Us</h2>
             </Grid>
 
             <Grid
@@ -73,7 +74,7 @@ const Home = () => {
               xs={12}
               md={12}
             >
-              <p>
+              <p className="mt-4">
                 Cavalier is a Cape Town based interior design studio. We are
                 creators of progressive, elegant furniture and lighting, as well
                 as artisanal objects and contemporary floor art. Our design is
@@ -97,7 +98,7 @@ const Home = () => {
               xs={12}
               md={12}
             >
-              <p>Products</p>
+              <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">Products</h2>
             </Grid>
             {products?.map((item, idx) => (
               <Grid item xs={12} md={4} className="mb-4 text-center" key={idx}>
