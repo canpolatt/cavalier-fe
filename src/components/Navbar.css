@@ -1,15 +1,22 @@
 .header {
-  background-color: white !important;
   box-shadow: none !important;
-  border-bottom: 1px solid gainsboro;
+  padding:1rem .5rem;
 }
 
 .header svg {
-  fill: #000;
+  fill: #fff;
+}
+.header svg:hover {
+  fill: #ffffffb4 !important;
 }
 
+
 .header p {
-  color: #000 !important;
+  color: #fff !important;
+}
+
+.header p:hover {
+  color: #ffffffb4 !important;
 }
 
 .profile-wrapper > p {

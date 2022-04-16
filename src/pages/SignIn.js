@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-
 import TextField from "@mui/material/TextField";
 import { Button, Checkbox, IconButton, InputAdornment } from "@mui/material";
 import Alert from "@mui/material/Alert";
@@ -104,6 +103,22 @@ const SignIn = () => {
             id="outlined-error-helper-text-1"
             value={formik.values.email}
             label="Email"
+            sx={{
+              "& label.Mui-focused": {
+                color: "#a08862",
+              },
+              "& .MuiInput-underline:after": {
+                borderBottomColor: "#a08862",
+              },
+              "& .MuiOutlinedInput-root": {
+                "&:hover fieldset": {
+                  borderColor: "#a08862",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#a08862",
+                },
+              },
+            }}
             onChange={(e) => setInputValue("email", e.target.value)}
             helperText={formik.errors.email}
           />
@@ -112,6 +127,22 @@ const SignIn = () => {
             id="outlined-error-helper-text-2"
             value={formik.values.password}
             label="Password"
+            sx={{
+              "& label.Mui-focused": {
+                color: "#a08862",
+              },
+              "& .MuiInput-underline:after": {
+                borderBottomColor: "#a08862",
+              },
+              "& .MuiOutlinedInput-root": {
+                "&:hover fieldset": {
+                  borderColor: "#a08862",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#a08862",
+                },
+              },
+            }}
             type={showPassword ? "text" : "password"}
             onChange={(e) => setInputValue("password", e.target.value)}
             helperText={formik.errors.password}
@@ -121,6 +152,7 @@ const SignIn = () => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
+                    sx={{ color: "#a08862" }}
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                   >
@@ -131,7 +163,16 @@ const SignIn = () => {
             }}
           />
           <div className="logged-in">
-            <Checkbox checked={loggedIn} onChange={handleCheck} />
+            <Checkbox
+              checked={loggedIn}
+              onChange={handleCheck}
+              sx={{
+                color: "#a08862",
+                "&.Mui-checked": {
+                  color: "#a08862",
+                },
+              }}
+            />
             <p>Remember me</p>
           </div>
 
