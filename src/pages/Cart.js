@@ -57,13 +57,13 @@ const Cart = () => {
         })}
       </ul>
       <div className="flex-1 p-8"></div>
-      <div className="rounded-tl-lg rounded-tr-lg drop-shadow-2xl fixed bottom-0 bg-neutral-800 w-full flex items-center h-14">
+      <div className="rounded-tl-lg rounded-tr-lg drop-shadow-2xl fixed bottom-0 bg-jet w-full flex items-center h-14">
         <p className="flex-1 text-center p-2 mx-1 font-bold text-white">
           {"₺" + total + ".00 / " + quantity + " adet ürün"}
         </p>
-        <button onClick={()=>navigate("/order")} className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-lime-600 text-white font-bold">
+        <button onClick={()=>navigate("/order")} className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold">
           {" "}
-          ALIŞVERİŞİ TAMAMLA{" "}
+          SEPETİ ONAYLA{" "}
         </button>
       </div>
     </div>

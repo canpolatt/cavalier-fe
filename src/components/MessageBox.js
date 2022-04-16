@@ -49,41 +49,120 @@ const MessageBox = () => {
   };
   return (
     <div className="p-8 flex flex-col">
-      <p className="text-center text-3xl">Biz Size Ulaşalım</p>
-      <form onSubmit={formik.handleSubmit} className="p-8 flex flex-col gap-4">
+      <p className="text-center text-xl md:text-2xl lg:text-3xl my-4">
+        Biz Size Ulaşalım
+      </p>
+      <form
+        onSubmit={formik.handleSubmit}
+        className="p-8 flex flex-col gap-4 border"
+      >
         <TextField
+          InputProps={{ style: { fontSize: "80%" } }}
+          InputLabelProps={{ style: { fontSize: "80%" } }}
           error={formik.errors.name}
           id="outlined-error-helper-text-1"
           value={formik.values.name}
           label="Ad"
           onChange={(e) => setInputValue("name", e.target.value)}
           helperText={formik.errors.name}
+          sx={{
+            "& label.Mui-focused": {
+              color: "#a08862",
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "#a08862",
+            },
+            "& .MuiOutlinedInput-root": {
+              "&:hover fieldset": {
+                borderColor: "#a08862",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#a08862",
+              },
+            },
+          }}
         />
         <TextField
+          InputProps={{ style: { fontSize: "80%" } }}
+          InputLabelProps={{ style: { fontSize: "80%" } }}
           error={formik.errors.surname}
           id="outlined-error-helper-text-2"
           value={formik.values.surname}
           label="Soyad"
           onChange={(e) => setInputValue("surname", e.target.value)}
           helperText={formik.errors.surname}
+          sx={{
+            "& label.Mui-focused": {
+              color: "#a08862",
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "#a08862",
+            },
+            "& .MuiOutlinedInput-root": {
+              "&:hover fieldset": {
+                borderColor: "#a08862",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#a08862",
+              },
+            },
+          }}
         />
         <TextField
+          InputProps={{ style: { fontSize: "80%" } }}
+          InputLabelProps={{ style: { fontSize: "80%" } }}
           error={formik.errors.phone}
           id="outlined-error-helper-text-3"
           value={formik.values.phone}
           label="Telefon"
           onChange={(e) => setInputValue("phone", e.target.value)}
           helperText={formik.errors.phone}
+          sx={{
+            "& label.Mui-focused": {
+              color: "#a08862",
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "#a08862",
+            },
+            "& .MuiOutlinedInput-root": {
+              "&:hover fieldset": {
+                borderColor: "#a08862",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#a08862",
+              },
+            },
+          }}
         />
         <TextField
+          InputProps={{ style: { fontSize: "80%" } }}
+          InputLabelProps={{ style: { fontSize: "80%" } }}
           error={formik.errors.email}
           id="outlined-error-helper-text-4"
           value={formik.values.email}
           label="Posta Adresi"
           onChange={(e) => setInputValue("email", e.target.value)}
           helperText={formik.errors.email}
+          sx={{
+            "& label.Mui-focused": {
+              color: "#a08862",
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "#a08862",
+            },
+            "& .MuiOutlinedInput-root": {
+              "&:hover fieldset": {
+                borderColor: "#a08862",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#a08862",
+              },
+            },
+          }}
         />
         <TextField
+          InputProps={{ style: { fontSize: "80%" } }}
+          InputLabelProps={{ style: { fontSize: "80%" } }}
           error={formik.errors.message}
           multiline
           variant="outlined"
@@ -94,9 +173,28 @@ const MessageBox = () => {
           onChange={(e) => setInputValue("message", e.target.value)}
           helperText={formik.errors.message}
           inputProps={{ maxLength: 255 }}
+          sx={{
+            "& label.Mui-focused": {
+              color: "#a08862",
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "#a08862",
+            },
+            "& .MuiOutlinedInput-root": {
+              "&:hover fieldset": {
+                borderColor: "#a08862",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#a08862",
+              },
+            },
+          }}
         ></TextField>
         <p className="text-right">{formik.values.message.length} / 255</p>
-        <button type="submit" className="border mt-4 w-1/4">
+        <button
+          type="submit"
+          className="border mt-4 w-full md:w-1/4 p-4 bg-golden text-white"
+        >
           Gönder
         </button>
       </form>
