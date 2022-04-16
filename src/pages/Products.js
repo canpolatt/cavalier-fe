@@ -7,18 +7,13 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsLoading } from "../redux/loading/loadingSlice";
 import Loading from "../components/Loading";
-import {useNavigate, useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
   const [data, setData] = useState([]);
-  const {category} = useParams();
-  const navigate = useNavigate();
+  const { category } = useParams();
   const isLoading = useSelector((state) => state.loading.isLoading);
   const dispatch = useDispatch();
-
-  const handleClick = () => {
-    navigate("/products")
-  }
 
   useEffect(() => {
     dispatch(setIsLoading("pending"));
@@ -49,7 +44,6 @@ const Products = () => {
               className="border p-2 mb-2 w-full lg:w-1/4"
             />
             <div className="flex items-center justify-center gap-2">
-            <button onClick={handleClick}>Tüm ürünler</button>
               <LoadingButton loading variant="outlined" className="flex-1">
                 Submit
               </LoadingButton>
