@@ -25,6 +25,7 @@ const App = () => {
           <Route path="about" element={<About />} />
           <Route path="products" element={<Products />} />
           <Route path="products/:product_id" element={<ProductDetail />} />
+          <Route path="products/filter/:category" element={<Products />} />
           <Route path="cart" element={<Cart />} />
           <Route path="order" element={<Order />} />
           <Route
