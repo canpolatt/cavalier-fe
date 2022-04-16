@@ -8,6 +8,11 @@
   padding: 4rem;
   border-radius: 0.5rem;
 }
+@media screen and (max-width: 768px) {
+.form-wrapper{
+  width: 23rem;
+}
+}
 
 .form {
   display: flex;

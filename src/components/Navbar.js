@@ -15,7 +15,7 @@ import AssessmentIcon from "@mui/icons-material/Assessment";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -39,13 +39,14 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" className="header">
+    <AppBar position="static" className="header bg-jet">
       <Toolbar className="flex">
         <div className="absolute lg:relative lg:flex-1">
-          <Drawers/>
+          <Drawers />
         </div>
+
         <Typography
-          className="lg:flex-1 lg:text-center ml-7 lg:ml-0"
+          className="lg:flex-1 lg:text-center ml-7 lg:ml-0 text-white font-normal"
           style={{
             color: "#000",
             fontSize: "1.5em",
@@ -57,20 +58,23 @@ const Navbar = () => {
         >
           Cavalier
         </Typography>
-        {}
+
         {!auth.isLoggedIn ? (
-          <div className="flex-1 flex justify-end">
+          <div className="flex-1 flex justify-end ">
             <div className="flex items-center justify-center">
-            <Badge
-              badgeContent={cartQuantity}
-              color="error"
-              className="hover:cursor-pointer"
-            >
-              <LocalGroceryStoreIcon color="action" onClick={()=>navigate("cart")}/>
-            </Badge>
+              <Badge
+                badgeContent={cartQuantity}
+                color="error"
+                className="hover:cursor-pointer"
+              >
+                <LocalGroceryStoreIcon
+                  color="action"
+                  onClick={() => navigate("cart")}
+                />
+              </Badge>
             </div>
             <Button
-              className="cavalier-btn-default"
+              className="cavalier-btn-default hover:text-[#ffffffb4]"
               onClick={() => navigate("/login")}
             >
               Login
@@ -101,7 +105,10 @@ const Navbar = () => {
               color="error"
               className="hover:cursor-pointer mr-4"
             >
-              <LocalGroceryStoreIcon color="action" onClick={()=>navigate("cart")} />
+              <LocalGroceryStoreIcon
+                color="action"
+                onClick={() => navigate("cart")}
+              />
             </Badge>
             <IconButton
               size="large"
@@ -109,7 +116,6 @@ const Navbar = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleMenu}
-              color="inherit"
               className="profile-wrapper text-base"
             >
               <p> {auth.name}</p>

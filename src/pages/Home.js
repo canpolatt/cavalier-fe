@@ -12,6 +12,7 @@ import SliderImage2 from "../assets/009A3541.JPG";
 import SliderImage3 from "../assets/009A3144.jpg";
 import Categories from "../components/Categories";
 import Loading from "../components/Loading";
+import MessageBox from "../components/MessageBox";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsLoading } from "../redux/loading/loadingSlice";
 
@@ -109,6 +110,7 @@ const Home = () => {
               </Grid>
             ))}
           </Grid>
+          <MessageBox/>
         </Container>
       )}
     </>

@@ -15,10 +15,9 @@ body{
 }
 
 .cavalier-btn-default {
-  @apply bg-transparent text-black !important;
+  @apply bg-transparent text-white font-semibold !important;
 }
 .cavalier-btn-primary {
-  background-color: #2563eb !important;
-  color: white !important;
+  @apply bg-golden text-white font-medium !important;
   /* @apply bg-red-400 text-white !important; */
 }
