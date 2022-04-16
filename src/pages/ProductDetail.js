@@ -10,11 +10,13 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { addCart } from "../redux/shoppingCart/shoppingCartSlice";
 import { ProductObj } from "../utils/productObj";
+import {useNavigate} from "react-router-dom";
 
 const ProductDetail = () => {
   const { product_id } = useParams();
   const [details, setDetails] = useState([]);
   const isLoading = useSelector((state) => state.loading.isLoading);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //Validation schema
@@ -146,10 +148,11 @@ const ProductDetail = () => {
                     {formik.errors.color}
                   </small>
                 </ul>
-                <ul className="flex flex-wrap py-2">
+                <ul className="flex flex-wrap py-4">
                   {details?.categories?.map((item, idx) => (
                     <li
-                      className="text-sm border p-1 rounded-xl border-slate-300 mr-2 mb-2"
+                      onClick={()=>navigate("/products/filter/"+item)}
+                      className="text-sm border p-1 rounded-xl border-slate-300 mr-2 mb-2 hover:cursor-pointer"
                       key={idx}
                     >
                       {item}
