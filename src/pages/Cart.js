@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { colors } from "../utils/colors";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.products);
@@ -27,14 +26,17 @@ const Cart = () => {
                   />
                 </div>
                 <div className="p-2 flex flex-col gap-y-3">
-                  <h3 className="text-sm lg:text-lg lg:font-semibold">{item.title}</h3>
+                  <h3 className="text-sm lg:text-lg lg:font-semibold">
+                    {item.title}
+                  </h3>
                   <p className="text-xs lg:text-sm">
                     {item.description.slice(0, 40) + "..."}
                   </p>
                   <div className="flex gap-2">
                     <label>Renk:</label>
                     <div
-                      className={`${colors[item.color]} rounded-full w-6 h-6`}
+                      className={`rounded-full w-6 h-6`}
+                      style={{ backgroundColor: `${item.color}` }}
                     ></div>
                   </div>
                   <div className="flex items-center gap-x-2">
@@ -61,7 +63,10 @@ const Cart = () => {
         <p className="flex-1 text-center p-2 mx-1 font-bold text-white">
           {"₺" + total + ".00 / " + quantity + " adet ürün"}
         </p>
-        <button onClick={()=>navigate("/order")} className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold">
+        <button
+          onClick={() => navigate("/order")}
+          className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
+        >
           {" "}
           SEPETİ ONAYLA{" "}
         </button>
