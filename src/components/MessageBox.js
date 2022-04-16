@@ -1,6 +1,6 @@
-import postMessage from "../components/MessageBox";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
+import postMessage from "../api/messageApi";
 import * as Yup from "yup";
 
 const phoneRegExp =
@@ -35,7 +35,7 @@ const MessageBox = () => {
     validationSchema: validate,
     onSubmit: (values) => {
       formik.setValues(initialValues);
-      console.log(values)
+      postMessage("/api/messagebox", values);
     },
     validateOnChange: false,
     validateOnBlur: false,
