@@ -54,7 +54,7 @@ const ProductCard = ({ item }) => {
   };
 
   const addToCart = () => {
-    const obj = new ProductObj(color, size, 1, item._id);
+    const obj = new ProductObj(color, size, 1, item._id, item.price, item.image, item.description, item.title);
     dispatch(addCart({ ...obj }));
   };
 
@@ -101,6 +101,7 @@ const ProductCard = ({ item }) => {
                 <MenuItem
                   value={item.height + " x " + item.width + " " + item.depth}
                   id={idx}
+                  key={idx}
                 >
                   {item.height + " x " + item.width + " " + item.depth}
                 </MenuItem>

@@ -8,7 +8,14 @@ module.exports = {
       },
       flex:{
         '2':'2 2 0%'
-      }
+      },
+      colors: {
+        'black_coffee': '#362c2c',
+        'baby_powder': '#fffffc',
+        'khaki_web': '#beb7a4',
+        'saddle_brown': '#934c0f',
+        'red_orange': '#ff3f00',
+      },
     },
   },
   plugins: [],

@@ -20,9 +20,8 @@ const cartSlice = createSlice({
         state.products.push(action.payload);
         state.quantity += 1;
       }
+      state.total += action.payload.price;
     },
-    // there is a bug in here.If color and size overrides.
-    // when going previous page there is a bug too.
   },
 });
 
