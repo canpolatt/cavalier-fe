@@ -41,6 +41,11 @@ const ProductCard = ({ item }) => {
     setOpen(true);
   };
 
+  const handleAddToCart = () => {
+    addToCart();
+    setOpen(false);
+  }
+
   const handleChange = (event) => {
     setSize(event.target.value);
   };
@@ -109,8 +114,8 @@ const ProductCard = ({ item }) => {
             </Select>
           </span>
           <button
-            className="mt-4 w-full rounded-lg flex-[2_2_0%] p-2 mx-1 bg-lime-600 text-white font-bold"
-            onClick={() => addToCart()}
+            className="mt-4 w-full rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
+            onClick={handleAddToCart}
           >
             Sepete ekle
           </button>
