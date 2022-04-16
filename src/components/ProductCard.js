@@ -39,6 +39,7 @@ const ProductCard = ({ item }) => {
       size: "",
       color: "",
     });
+    formik.setErrors({});
     setOpen(true);
   };
 
