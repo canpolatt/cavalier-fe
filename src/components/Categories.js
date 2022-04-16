@@ -5,20 +5,31 @@ import { useNavigate } from "react-router-dom";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import "swiper/css";
 
+import "swiper/css";
 const Categories = ({ slidesPerView }) => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     getAllCategories()
-      .then((res) => setCategories(res))
+      .then((res) =>
+        setCategories([
+          { name: "Tüm ürünler", image: "https://i.imgur.com/r85feH0" },
+          ...res,
+        ])
+      )
       .catch((e) => console.log(e));
   }, []);
 
   const handleClick = (category) => {
+    if(category.name === "Tüm ürünler"){
+    navigate("/products")
+    console.log("girdim")
+    }
+    else {
     navigate("/products/filter/" + category.name);
+    }
   };
 
   return (

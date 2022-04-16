@@ -71,6 +71,7 @@ const ProductDetail = () => {
       {isLoading === "initial" || isLoading === "pending" ? (
         <Loading />
       ) : (
+        <div className="flex-1 bg-slate-50">
         <form onSubmit={formik.handleSubmit}>
           <div className="z-50 bg-slate-50 flex-1 py-4 flex flex-col items-center justify-center">
             <div className="lg:w-10/12 p-4">
@@ -171,6 +172,7 @@ const ProductDetail = () => {
             </div>
           </div>
         </form>
+        </div>
       )}
     </>
   );
