@@ -16,6 +16,7 @@ import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -24,6 +25,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartQuantity = useSelector((state) => state.cart.quantity);
+  const { t } = useTranslation();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -77,7 +79,7 @@ const Navbar = () => {
               className="cavalier-btn-default hover:text-[#ffffffb4]"
               onClick={() => navigate("/login")}
             >
-              Login
+              {t("login")}
             </Button>
           </div>
         ) : (
