@@ -50,7 +50,7 @@ const Home = () => {
           <Categories slidesPerView={3}/>
           <Grid item xs={12} md={12}>
             <img
-              className="mx-auto "
+              className="mx-auto assets-loading"
               style={{ border: ".5px solid gainsboro" }}
               src="https://st1.myideasoft.com/shop/bo/48/myassets/products/681/rattan-masa-seti-ant.jpg?revision=1639823801"
               alt="product"

@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./layout/AppLayout";
 import LoginLayout from "./layout/LoginLayout";
@@ -13,8 +14,17 @@ import SignIn from "./pages/SignIn";
 import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import Success from "./pages/Success";
+import {useDispatch} from "react-redux";
+import {fillWithCookie} from "./redux/shoppingCart/shoppingCartSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(document.cookie)
+    dispatch(fillWithCookie(document.cookie))
+  },[dispatch])
+
   return (
     <>
       <Routes>
