@@ -46,7 +46,7 @@ const Categories = ({ slidesPerView }) => {
           <img
             src={category.image + ".jpeg"}
             alt={idx}
-            className="w-12 h-12 md:w-24 md:h-24 rounded-full border border-gray-200 hover:brightness-90 hover:cursor-pointer"
+            className="assets-loading w-12 h-12 md:w-24 md:h-24 rounded-full border border-gray-200 hover:brightness-90 hover:cursor-pointer"
           />
           <h4 className="text-center text-slate-600 text-xs md:text-md">
             {category.name}

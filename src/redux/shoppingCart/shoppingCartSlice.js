@@ -6,6 +6,13 @@ const initialState = {
   total: 0,
 };
 
+function setCookie(cName, cValue, expDays) {
+  let date = new Date();
+  date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+}
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -24,6 +31,7 @@ const cartSlice = createSlice({
         state.quantity += 1;
       }
       state.total += action.payload.price;
+      setCookie("cart", JSON.stringify({products:state.products,quantity:state.quantity,totalPrice:state.total}),1);
     },
     removeFromCart: (state, action) => {
       const product = state.products.find(
@@ -40,12 +48,20 @@ const cartSlice = createSlice({
         product.quantity--;
       }
       state.total -= action.payload.price;
+      setCookie("cart", JSON.stringify({products:state.products,quantity:state.quantity,totalPrice:state.total}),1);
     },
     backToInitialState: () => {
+      document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
       return initialState;
     },
+    fillWithCookie: (state,action) => {
+      const cookieCart = JSON.parse(action.payload.substr(5));
+      state.products = [...cookieCart.products];
+      state.quantity = cookieCart.quantity;
+      state.total = cookieCart.totalPrice;
+    }
   },
 });
 
-export const { addCart, removeFromCart, backToInitialState } = cartSlice.actions;
+export const { addCart, removeFromCart, backToInitialState, fillWithCookie } = cartSlice.actions;
 export default cartSlice.reducer;
