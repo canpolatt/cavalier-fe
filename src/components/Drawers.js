@@ -4,13 +4,14 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import TranslateIcon from "@mui/icons-material/Translate";
 import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
-import ChairIcon from '@mui/icons-material/Chair';
-import HomeIcon from '@mui/icons-material/Home';
+import ChairIcon from "@mui/icons-material/Chair";
+import HomeIcon from "@mui/icons-material/Home";
+import Helper from "../utils/Helper";
 
 const Drawers = () => {
   const [state, setState] = useState({
@@ -39,22 +40,46 @@ const Drawers = () => {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
+      className="h-full"
     >
-      <List>
-        <ListItem button onClick={() => navigate("/")}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Anasayfa" />
-        </ListItem>
-        <ListItem button onClick={() => navigate("/products")}>
-          <ListItemIcon>
-            <ChairIcon />
-          </ListItemIcon>
-          <ListItemText primary="Ürünler" />
-        </ListItem>
+      <List className="flex flex-col h-full justify-between">
+        <div>
+          <ListItem button onClick={() => navigate("/")}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Anasayfa" />
+          </ListItem>
+          <ListItem button onClick={() => navigate("/products")}>
+            <ListItemIcon>
+              <ChairIcon />
+            </ListItemIcon>
+            <ListItemText primary="Ürünler" />
+          </ListItem>
+        </div>
+        <div>
+          <ListItem button onClick={() => Helper.setDefaultLanguage("tr")}>
+            <ListItemIcon>
+              <TranslateIcon />
+            </ListItemIcon>
+            <ListItemText primary="Turkish" />
+          </ListItem>
+
+          <ListItem button onClick={() => Helper.setDefaultLanguage("en")}>
+            <ListItemIcon>
+              <TranslateIcon />
+            </ListItemIcon>
+            <ListItemText primary="English" />
+          </ListItem>
+
+          <ListItem button onClick={() => Helper.setDefaultLanguage("ru")}>
+            <ListItemIcon>
+              <TranslateIcon />
+            </ListItemIcon>
+            <ListItemText primary="Russian" />
+          </ListItem>
+        </div>
       </List>
-      <Divider />
     </Box>
   );
 
