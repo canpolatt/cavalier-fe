@@ -67,9 +67,13 @@ const ProductDetail = () => {
       .finally(() => dispatch(setIsLoading("fulfilled")));
   }, [product_id, dispatch]);
 
+  useEffect(() => {
+    if(details.status === 500)
+    navigate("/404")
+  },[navigate,details.status])
+
   return (
     <>
-      {isLoading && console.log(isLoading)}
       {isLoading === "initial" || isLoading === "pending" ? (
         <Loading />
       ) : (

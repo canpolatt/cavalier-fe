@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addCart, removeFromCart } from "../redux/shoppingCart/shoppingCartSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 
@@ -6,7 +7,17 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart.products);
   const total = useSelector((state) => state.cart.total);
   const quantity = useSelector((state) => state.cart.quantity);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleClick = (item, calc) => {
+    if (calc === "dec") {
+      dispatch(removeFromCart(item))
+    }
+    if (calc === "inc") {
+      dispatch(addCart(item))
+    }
+  };
 
   return (
     <div className="flex-1 flex flex-col lg:flex-row ">
@@ -46,13 +57,21 @@ const Cart = () => {
                 </div>
               </div>
               <div className="flex p-2 w-1/4 mt-auto lg:mt-0">
-                <button className="flex-1 border">
-                  {item.quantity === 0 ? <DeleteIcon color="warning" /> : "-"}
+                <button
+                  onClick={() => handleClick(item, "dec")}
+                  className="flex-1 border"
+                >
+                  {item.quantity === 1 ? <DeleteIcon color="warning" /> : "-"}
                 </button>
                 <p className="flex-1 flex items-center justify-center">
                   {item.quantity}
                 </p>
-                <button className="flex-1 border">+</button>
+                <button
+                  onClick={() => handleClick(item, "inc")}
+                  className="flex-1 border"
+                >
+                  +
+                </button>
               </div>
             </li>
           );
@@ -60,11 +79,13 @@ const Cart = () => {
       </ul>
       <div className="flex-1 p-8"></div>
       <div className="rounded-tl-lg rounded-tr-lg drop-shadow-2xl fixed bottom-0 bg-jet w-full flex items-center h-14">
-        <p className="flex-1 text-center p-2 mx-1 font-bold text-white">
-          {"₺" + total + ".00 / " + quantity + " adet ürün"}
+        <p className="flex-1 text-center p-2 mx-1 font-bold text-white flex flex-col">
+          {"₺" + total + ".00"}
+          <span>{quantity + " adet ürün"}</span>
         </p>
+
         <button
-          onClick={() => navigate("/order")}
+          onClick={() => cartItems.length > 0 && navigate("/order")}
           className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
         >
           {" "}
