@@ -25,7 +25,6 @@ const Categories = ({ slidesPerView }) => {
   const handleClick = (category) => {
     if(category.name === "Tüm ürünler"){
     navigate("/products")
-    console.log("girdim")
     }
     else {
     navigate("/products/filter/" + category.name);

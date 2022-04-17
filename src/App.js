@@ -12,6 +12,7 @@ import Products from "./pages/Products";
 import SignIn from "./pages/SignIn";
 import Cart from "./pages/Cart";
 import Order from "./pages/Order";
+import Success from "./pages/Success";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="products/filter/:category" element={<Products />} />
           <Route path="cart" element={<Cart />} />
           <Route path="order" element={<Order />} />
+          <Route path="order/success/:order_id" element={<Success />} />
           <Route
             path="panel"
             element={
