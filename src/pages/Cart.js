@@ -44,31 +44,31 @@ const Cart = () => {
                     {item.description.slice(0, 40) + "..."}
                   </p>
                   <div className="flex gap-2">
-                    <label>Renk:</label>
+                    <label className="text-sm">Renk:</label>
                     <div
                       className={`rounded-full w-6 h-6`}
                       style={{ backgroundColor: `${item.color}` }}
                     ></div>
                   </div>
                   <div className="flex items-center gap-x-2">
-                    <label>Boyut:</label>
-                    <p className="text-sm lg:text-md ">{item.size}</p>
+                    <label className="text-sm">Boyut:</label>
+                    <p className="text-xs lg:text-md ">{item.size}</p>
                   </div>
                 </div>
               </div>
               <div className="flex p-2 w-1/4 mt-auto lg:mt-0">
                 <button
                   onClick={() => handleClick(item, "dec")}
-                  className="flex-1 border"
+                  className={item.quantity !== 1 ? `border p-2 flex-1` : `flex-1` }
                 >
                   {item.quantity === 1 ? <DeleteIcon color="warning" /> : "-"}
                 </button>
-                <p className="flex-1 flex items-center justify-center">
+                <p className="flex-1 flex items-center justify-center p-2">
                   {item.quantity}
                 </p>
                 <button
                   onClick={() => handleClick(item, "inc")}
-                  className="flex-1 border"
+                  className="flex-1 border p-1"
                 >
                   +
                 </button>
