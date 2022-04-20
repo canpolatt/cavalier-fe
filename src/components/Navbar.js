@@ -31,6 +31,11 @@ const Navbar = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleClick = () => {
+    handleClose();
+    navigate("/profile");
+  }
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -123,6 +128,7 @@ const Navbar = () => {
               <p> {auth.name}</p>
             </IconButton>
             <Menu
+              className="mt-12"
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
@@ -137,9 +143,9 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleLogout}>Log out</MenuItem>
+              <MenuItem onClick={handleClick}>Profil</MenuItem>
+              <MenuItem onClick={handleClose}>Siparişlerim</MenuItem>
+              <MenuItem onClick={handleLogout}>Çıkış yap</MenuItem>
             </Menu>
           </div>
         )}
