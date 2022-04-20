@@ -44,6 +44,7 @@ const Categories = ({ slidesPerView }) => {
           className="flex flex-col items-center gap-y-1 py-8"
         >
           <img
+            loading="lazy"
             src={category.image + ".jpeg"}
             alt={idx}
             className="assets-loading w-12 h-12 md:w-24 md:h-24 rounded-full border border-gray-200 hover:brightness-90 hover:cursor-pointer"

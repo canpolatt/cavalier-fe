@@ -83,6 +83,7 @@ const ProductDetail = () => {
             <div className="lg:w-10/12 p-4">
               <div className="bg-slate-200 p-2 flex items-center justify-center">
                 <img
+                  loading="lazy"
                   className="object-cover max-w-xs"
                   src={details.image}
                   alt={details._id}

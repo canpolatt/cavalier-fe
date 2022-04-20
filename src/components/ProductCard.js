@@ -174,6 +174,7 @@ const ProductCard = ({ item }) => {
       <div className="md:max-w-xs lg:w-96 shadow-md rounded-lg handle--child-visibility flex flex-col cursor-pointer">
         <div className="relative border-b p-2">
           <img
+            loading="lazy"
             onClick={() => handleClick(item._id)}
             className="w-full p-2 h-48 object-cover"
             src={item.image}

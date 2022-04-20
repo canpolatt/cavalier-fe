@@ -14,6 +14,7 @@ import SignIn from "./pages/SignIn";
 import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import Success from "./pages/Success";
+import Profile from "./pages/Profile";
 import {useDispatch} from "react-redux";
 import {fillWithCookie} from "./redux/shoppingCart/shoppingCartSlice";
 
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
+          <Route path="profile" element={<Profile/>}/>
           <Route path="products" element={<Products />} />
           <Route path="products/:product_id" element={<ProductDetail />} />
           <Route path="products/filter/:category" element={<Products />} />
