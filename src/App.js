@@ -17,8 +17,6 @@ import Success from "./pages/Success";
 import Profile from "./pages/Profile";
 import { useDispatch } from "react-redux";
 import { fillWithCookie } from "./redux/shoppingCart/shoppingCartSlice";
-import { useDispatch } from "react-redux";
-import { fillWithCookie } from "./redux/shoppingCart/shoppingCartSlice";
 import MyOrders from "./pages/MyOrders";
 
 const App = () => {

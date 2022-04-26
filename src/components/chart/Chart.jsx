@@ -10,8 +10,6 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 
-
-
 const month = {
   1: "January",
   2: "February",
@@ -31,8 +29,7 @@ const Chart = ({ aspect, title, chartIncome }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log('Chart Income',chartIncome)
-    if(chartIncome.length > 0){
+    if (chartIncome.length > 0) {
       const tempData = chartIncome?.map((item) => ({
         ...item,
         name: month[item._id],
@@ -41,11 +38,11 @@ const Chart = ({ aspect, title, chartIncome }) => {
         tempData.unshift({
           _id: tempData[0]._id - 1,
           name: month[tempData[0]._id - 1],
-          count:0
+          count: 0,
         });
       }
+      tempData.sort((a, b) => a._id - b._id);
       setData(tempData);
-      console.log(tempData)
     }
   }, [chartIncome]);
 

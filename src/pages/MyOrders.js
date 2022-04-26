@@ -10,6 +10,7 @@ const MyOrders = () => {
 
   return (
     <>
+      {console.log(data)}
       {!data ? (
         <div className="flex-1 flex items-center justify-center">
           Görüntülenecek siparişiniz bulunmamaktadır.

@@ -45,7 +45,6 @@ const SignIn = () => {
     validationSchema: validate,
     onSubmit: async (values) => {
       const response = await dispatch(login(values));
-
       if (response.payload.status) {
         setToastObj({
           severity: "success",

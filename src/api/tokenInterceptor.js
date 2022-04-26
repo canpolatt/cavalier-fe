@@ -1,8 +1,7 @@
 const tokenInterceptor = (axios) => {
-  const accessToken = localStorage.getItem("accessToken");
-  console.log(accessToken)
   axios.interceptors.request.use(
     (config) => {
+      const accessToken = localStorage.getItem("accessToken");
       config.headers.authorization = `Bearer ${accessToken}`;
       return config;
     },

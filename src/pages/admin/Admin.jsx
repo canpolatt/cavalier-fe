@@ -17,7 +17,6 @@ const Admin = () => {
   useEffect(() => {
     Promise.all([getMessage(), getChartIncome()])
       .then((res) => {
-        console.log(res)
         setMessages(res[0]);
         setChartIncome(res[1]);
         setLoading(false);
