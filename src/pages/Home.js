@@ -37,20 +37,21 @@ const Home = () => {
         <Container maxWidth="lg" className="py-8">
           <Swiper id="swiper" modules={[Autoplay]} autoplay={{ delay: 2500 }}>
             <SwiperSlide>
-              <img src={SliderImage1} alt={SliderImage1} />
+              <img loading="lazy" src={SliderImage1} alt={SliderImage1} />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={SliderImage2} alt={SliderImage2} />
+              <img loading="lazy" src={SliderImage2} alt={SliderImage2} />
             </SwiperSlide>
             <SwiperSlide>
-              <img src={SliderImage3} alt={SliderImage3} />
+              <img loading="lazy" src={SliderImage3} alt={SliderImage3} />
             </SwiperSlide>
           </Swiper>
           <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">Kategoriler</h2>
           <Categories slidesPerView={3}/>
           <Grid item xs={12} md={12}>
             <img
-              className="mx-auto "
+              loading="lazy"
+              className="mx-auto assets-loading"
               style={{ border: ".5px solid gainsboro" }}
               src="https://st1.myideasoft.com/shop/bo/48/myassets/products/681/rattan-masa-seti-ant.jpg?revision=1639823801"
               alt="product"
@@ -103,6 +104,7 @@ const Home = () => {
             {products?.map((item, idx) => (
               <Grid item xs={12} md={4} className="mb-4 text-center" key={idx}>
                 <img
+                  loading="lazy"
                   className="w-full h-full object-cover hover:brightness-75 hover:cursor-pointer"
                   src={item.image}
                   alt={item.title}

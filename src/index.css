@@ -9,9 +9,21 @@
   padding: 0;
 }
 
+
+
 body{
   display:flex;
   flex-direction:column;
+}
+
+.assets-loading{
+  background-size: 50px 50px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+img{
+  background: url("./assets/background.svg") center center no-repeat;
 }
 
 .cavalier-btn-default {

@@ -10,11 +10,13 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { addCart } from "../redux/shoppingCart/shoppingCartSlice";
 import { ProductObj } from "../utils/productObj";
+import {useNavigate} from "react-router-dom";
 
 const ProductDetail = () => {
   const { product_id } = useParams();
   const [details, setDetails] = useState([]);
   const isLoading = useSelector((state) => state.loading.isLoading);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //Validation schema
@@ -65,17 +67,23 @@ const ProductDetail = () => {
       .finally(() => dispatch(setIsLoading("fulfilled")));
   }, [product_id, dispatch]);
 
+  useEffect(() => {
+    if(details.status === 500)
+    navigate("/404")
+  },[navigate,details.status])
+
   return (
     <>
-      {isLoading && console.log(isLoading)}
       {isLoading === "initial" || isLoading === "pending" ? (
         <Loading />
       ) : (
+        <div className="flex-1 bg-slate-50">
         <form onSubmit={formik.handleSubmit}>
           <div className="z-50 bg-slate-50 flex-1 py-4 flex flex-col items-center justify-center">
             <div className="lg:w-10/12 p-4">
               <div className="bg-slate-200 p-2 flex items-center justify-center">
                 <img
+                  loading="lazy"
                   className="object-cover max-w-xs"
                   src={details.image}
                   alt={details._id}
@@ -145,10 +153,11 @@ const ProductDetail = () => {
                     {formik.errors.color}
                   </small>
                 </ul>
-                <ul className="flex flex-wrap py-2">
+                <ul className="flex flex-wrap py-4">
                   {details?.categories?.map((item, idx) => (
                     <li
-                      className="text-sm border p-1 rounded-xl border-slate-300 mr-2 mb-2"
+                      onClick={()=>navigate("/products/filter/"+item)}
+                      className="text-sm border p-1 rounded-xl border-slate-300 mr-2 mb-2 hover:cursor-pointer"
                       key={idx}
                     >
                       {item}
@@ -171,6 +180,7 @@ const ProductDetail = () => {
             </div>
           </div>
         </form>
+        </div>
       )}
     </>
   );
