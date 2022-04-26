@@ -31,9 +31,9 @@ const Navbar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClick = () => {
+  const handleClick = (navigator) => {
     handleClose();
-    navigate("/profile");
+    navigate(`/${navigator}`);
   }
 
   const handleClose = () => {
@@ -143,8 +143,8 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClick}>Profil</MenuItem>
-              <MenuItem onClick={handleClose}>Siparişlerim</MenuItem>
+              <MenuItem onClick={()=>handleClick("profile")}>Profil</MenuItem>
+              <MenuItem onClick={()=>handleClick("myorders")}>Siparişlerim</MenuItem>
               <MenuItem onClick={handleLogout}>Çıkış yap</MenuItem>
             </Menu>
           </div>

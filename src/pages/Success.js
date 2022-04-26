@@ -18,7 +18,7 @@ const Success = () => {
     if (location.state !== 200) {
       navigate("/");
     } else {
-      getOrder(order_id)
+      getOrder("/"+order_id)
         .then((res) => setOrderDetails(res))
         .finally(() => dispatch(setIsLoading("fulfilled")));
     }
