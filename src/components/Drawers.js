@@ -4,12 +4,14 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import TranslateIcon from "@mui/icons-material/Translate";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import { useNavigate } from "react-router-dom";
+import ChairIcon from "@mui/icons-material/Chair";
+import HomeIcon from "@mui/icons-material/Home";
+import Helper from "../utils/Helper";
 
 const Drawers = () => {
   const [state, setState] = useState({
@@ -18,6 +20,8 @@ const Drawers = () => {
     bottom: false,
     right: false,
   });
+
+  const navigate = useNavigate();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -36,27 +40,45 @@ const Drawers = () => {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
+      className="h-full"
     >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
+      <List className="flex flex-col h-full justify-between">
+        <div>
+          <ListItem button onClick={() => navigate("/")}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary="Anasayfa" />
           </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button onClick={() => navigate("/products")}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <ChairIcon />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary="Ürünler" />
           </ListItem>
-        ))}
+        </div>
+        <div>
+          <ListItem button onClick={() => Helper.setDefaultLanguage("tr")}>
+            <ListItemIcon>
+              <TranslateIcon />
+            </ListItemIcon>
+            <ListItemText primary="Turkish" />
+          </ListItem>
+
+          <ListItem button onClick={() => Helper.setDefaultLanguage("en")}>
+            <ListItemIcon>
+              <TranslateIcon />
+            </ListItemIcon>
+            <ListItemText primary="English" />
+          </ListItem>
+
+          <ListItem button onClick={() => Helper.setDefaultLanguage("ru")}>
+            <ListItemIcon>
+              <TranslateIcon />
+            </ListItemIcon>
+            <ListItemText primary="Russian" />
+          </ListItem>
+        </div>
       </List>
     </Box>
   );

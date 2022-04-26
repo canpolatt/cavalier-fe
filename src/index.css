@@ -1,6 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
+}
+
+body{
+  display:flex;
+  flex-direction:column;
+}
+
+.cavalier-btn-default {
+  @apply bg-transparent text-white font-semibold !important;
+}
+.cavalier-btn-primary {
+  @apply bg-golden text-white font-medium !important;
+  /* @apply bg-red-400 text-white !important; */
 }

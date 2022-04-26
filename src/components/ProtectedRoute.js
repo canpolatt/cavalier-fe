@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children, permittedRoles }) => {
   const auth = useAuth();
-  const authType = auth.isAdmin;
+  const authType = auth.userType;
 
   return auth.isLoggedIn ? (
     permittedRoles.some((item) => authType.includes(item)) ? (
@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children, permittedRoles }) => {
       <Navigate to={"/401"} />
     )
   ) : (
-    <Navigate to={"/signin"} />
+    <Navigate to={"/"} />
   );
 };
 

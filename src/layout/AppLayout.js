@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 
 const AppLayout = () => {
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Navbar />
       <Outlet />
       <Footer />

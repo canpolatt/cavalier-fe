@@ -1,7 +1,11 @@
 import React from "react";
 
 const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <footer className="text-xs md:text-sm p-4 bg-jet flex items-center justify-start mb-0 text-white">
+      ©2022 Cavalier Mobilya - Her Hakkı Saklıdır.
+    </footer>
+  );
 };
 
-export default Footer;
+export default React.memo(Footer);
