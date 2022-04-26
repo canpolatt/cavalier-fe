@@ -3,7 +3,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AppLayout from "./layout/AppLayout";
 import LoginLayout from "./layout/LoginLayout";
 import About from "./pages/About";
-import AdminPanel from "./pages/AdminPanel";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
@@ -12,6 +11,7 @@ import Products from "./pages/Products";
 import SignIn from "./pages/SignIn";
 import Cart from "./pages/Cart";
 import Order from "./pages/Order";
+import Admin from "./pages/admin/Admin";
 
 const App = () => {
   return (
@@ -28,18 +28,15 @@ const App = () => {
           <Route path="products/filter/:category" element={<Products />} />
           <Route path="cart" element={<Cart />} />
           <Route path="order" element={<Order />} />
-          <Route
-            path="panel"
-            element={
-              <ProtectedRoute
-                children={<AdminPanel />}
-                permittedRoles={["ADMIN"]}
-              />
-            }
-          />
           <Route path="401" element={<Page401 />} />
         </Route>
         <Route path="*" element={<NotFound />} />
+        <Route
+          path="panel"
+          element={
+            <ProtectedRoute children={<Admin />} permittedRoles={["ADMIN"]} />
+          }
+        />
       </Routes>
     </>
   );
