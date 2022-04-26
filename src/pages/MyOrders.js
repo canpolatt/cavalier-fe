@@ -27,7 +27,6 @@ const MyOrders = () => {
                 </p>
                 <p>Sipariş Detayı:{item.products.length} ürün hazırlanıyor.</p>
                 <p>Toplam:{item.totalPrice}₺</p>
-                <p>{item._id}</p>
                 <hr></hr>
               </li>
             ))}

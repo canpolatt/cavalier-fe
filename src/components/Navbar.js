@@ -34,7 +34,7 @@ const Navbar = () => {
   const handleClick = (navigator) => {
     handleClose();
     navigate(`/${navigator}`);
-  }
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -43,6 +43,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     setAnchorEl(null);
+    navigate("/");
   };
 
   return (
@@ -143,8 +144,10 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={()=>handleClick("profile")}>Profil</MenuItem>
-              <MenuItem onClick={()=>handleClick("myorders")}>Siparişlerim</MenuItem>
+              <MenuItem onClick={() => handleClick("profile")}>Profil</MenuItem>
+              <MenuItem onClick={() => handleClick("myorders")}>
+                Siparişlerim
+              </MenuItem>
               <MenuItem onClick={handleLogout}>Çıkış yap</MenuItem>
             </Menu>
           </div>
