@@ -24,6 +24,7 @@ body{
 
 img{
   background: url("./assets/background.svg") center center no-repeat;
+  background-size:  50% 50%;
 }
 
 .cavalier-btn-default {
