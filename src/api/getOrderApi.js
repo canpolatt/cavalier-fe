@@ -5,7 +5,7 @@ export const getOrder = async (id) => {
   tokenInterceptor(axios);
 
   return await axios
-    .get(process.env.REACT_APP_BASE_URL + `/api/orders/find/` + id)
+    .get(process.env.REACT_APP_BASE_URL + `/api/orders/find` + id)
     .then((res) => res.data)
     .catch((e) => e.response);
 };
