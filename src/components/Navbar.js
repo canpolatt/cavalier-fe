@@ -111,17 +111,17 @@ const Navbar = () => {
               </div>
             )}
             {auth.userType === "USER" && (
-                <Badge
-                  badgeContent={cartQuantity}
-                  color="error"
-                  className="hover:cursor-pointer"
-                >
-                  <LocalGroceryStoreIcon
-                    color="action"
-                    onClick={() => navigate("cart")}
-                  />
-                </Badge>
-              )}
+              <Badge
+                badgeContent={cartQuantity}
+                color="error"
+                className="hover:cursor-pointer"
+              >
+                <LocalGroceryStoreIcon
+                  color="action"
+                  onClick={() => navigate("cart")}
+                />
+              </Badge>
+            )}
             <IconButton
               size="large"
               aria-label="account of current user"

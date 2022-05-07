@@ -6,14 +6,20 @@ import MenuIcon from "@mui/icons-material/Menu";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import TranslateIcon from "@mui/icons-material/Translate";
 import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
 import ChairIcon from "@mui/icons-material/Chair";
 import HomeIcon from "@mui/icons-material/Home";
 import Helper from "../utils/Helper";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import AddIcon from "@mui/icons-material/Add";
+import useAuth from "../hooks/useAuth";
+import TurkeyFlag from "../assets/turkey.svg";
+import USAFlag from "../assets/united-states.svg";
+import RussiaFlag from "../assets/russia.svg";
 
 const Drawers = () => {
+  const auth = useAuth();
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -56,25 +62,63 @@ const Drawers = () => {
             </ListItemIcon>
             <ListItemText primary="Ürünler" />
           </ListItem>
+
+          {auth.isAdmin && (
+            <>
+              <ListItem
+                className="text-golden"
+                button
+                onClick={() => navigate("/panel")}
+              >
+                <ListItemIcon>
+                  <AssessmentIcon className="text-golden" />
+                </ListItemIcon>
+                <ListItemText primary="Panel" />
+              </ListItem>
+
+              <ListItem
+                className="text-golden "
+                button
+                onClick={() => navigate("/add-product")}
+              >
+                <ListItemIcon>
+                  <AddIcon className="text-golden " />
+                </ListItemIcon>
+                <ListItemText primary="Ürün Ekleme" />
+              </ListItem>
+            </>
+          )}
         </div>
         <div>
           <ListItem button onClick={() => Helper.setDefaultLanguage("tr")}>
             <ListItemIcon>
-              <TranslateIcon />
+              <img
+                className="w-10 border-gray-300 rounded"
+                src={TurkeyFlag}
+                alt={"turkey-flag"}
+              />
             </ListItemIcon>
             <ListItemText primary="Turkish" />
           </ListItem>
 
           <ListItem button onClick={() => Helper.setDefaultLanguage("en")}>
             <ListItemIcon>
-              <TranslateIcon />
+              <img
+                className="w-10 border-gray-300 rounded"
+                src={USAFlag}
+                alt={"usa-flag"}
+              />
             </ListItemIcon>
             <ListItemText primary="English" />
           </ListItem>
 
           <ListItem button onClick={() => Helper.setDefaultLanguage("ru")}>
             <ListItemIcon>
-              <TranslateIcon />
+              <img
+                className="w-10 border border-gray-300 rounded"
+                src={RussiaFlag}
+                alt={"russia-flag"}
+              />
             </ListItemIcon>
             <ListItemText primary="Russian" />
           </ListItem>

@@ -18,6 +18,7 @@ import Profile from "./pages/Profile";
 import { useDispatch } from "react-redux";
 import { fillWithCookie } from "./redux/shoppingCart/shoppingCartSlice";
 import MyOrders from "./pages/MyOrders";
+import ProductAdd from "./pages/admin/ProductAdd";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -45,20 +46,25 @@ const App = () => {
           <Route path="order" element={<Order />} />
           <Route path="order/success/:order_id" element={<Success />} />
           <Route
-            path="panel"
+            path="/panel"
             element={
               <ProtectedRoute children={<Admin />} permittedRoles={["ADMIN"]} />
             }
           />
+
+          <Route
+            path="/add-product"
+            element={
+              <ProtectedRoute
+                children={<ProductAdd />}
+                permittedRoles={["ADMIN"]}
+              />
+            }
+          />
+
           <Route path="401" element={<Page401 />} />
         </Route>
         <Route path="*" element={<NotFound />} />
-        <Route
-          path="panel"
-          element={
-            <ProtectedRoute children={<Admin />} permittedRoles={["ADMIN"]} />
-          }
-        />
       </Routes>
     </>
   );
