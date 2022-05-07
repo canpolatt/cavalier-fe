@@ -70,7 +70,7 @@ const Navbar = () => {
         {!auth.isLoggedIn ? (
           <div className="flex-1 flex justify-end ">
             <div className="flex items-center justify-center">
-              {auth.userType === "user" && (
+              {auth.userType === "USER" && (
                 <Badge
                   badgeContent={cartQuantity}
                   color="error"
@@ -110,7 +110,7 @@ const Navbar = () => {
                 </Button>
               </div>
             )}
-            {auth.userType === "user" && (
+            {auth.userType === "USER" && (
                 <Badge
                   badgeContent={cartQuantity}
                   color="error"
