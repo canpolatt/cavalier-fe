@@ -13,7 +13,11 @@ const initialState = {
 export const loginSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setName: (state, action) => {
+      state.name = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state, action) => {
       state.error = "";
@@ -42,4 +46,5 @@ export const loginSlice = createSlice({
   },
 });
 
+export const { setName } = loginSlice.actions;
 export default loginSlice.reducer;

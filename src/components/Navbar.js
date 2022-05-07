@@ -70,16 +70,18 @@ const Navbar = () => {
         {!auth.isLoggedIn ? (
           <div className="flex-1 flex justify-end ">
             <div className="flex items-center justify-center">
-              <Badge
-                badgeContent={cartQuantity}
-                color="error"
-                className="hover:cursor-pointer"
-              >
-                <LocalGroceryStoreIcon
-                  color="action"
-                  onClick={() => navigate("cart")}
-                />
-              </Badge>
+              {auth.userType === "USER" && (
+                <Badge
+                  badgeContent={cartQuantity}
+                  color="error"
+                  className="hover:cursor-pointer"
+                >
+                  <LocalGroceryStoreIcon
+                    color="action"
+                    onClick={() => navigate("cart")}
+                  />
+                </Badge>
+              )}
             </div>
             <Button
               className="cavalier-btn-default hover:text-[#ffffffb4]"
@@ -108,16 +110,18 @@ const Navbar = () => {
                 </Button>
               </div>
             )}
-            <Badge
-              badgeContent={cartQuantity}
-              color="error"
-              className="hover:cursor-pointer mr-4"
-            >
-              <LocalGroceryStoreIcon
-                color="action"
-                onClick={() => navigate("cart")}
-              />
-            </Badge>
+            {auth.userType === "USER" && (
+                <Badge
+                  badgeContent={cartQuantity}
+                  color="error"
+                  className="hover:cursor-pointer"
+                >
+                  <LocalGroceryStoreIcon
+                    color="action"
+                    onClick={() => navigate("cart")}
+                  />
+                </Badge>
+              )}
             <IconButton
               size="large"
               aria-label="account of current user"

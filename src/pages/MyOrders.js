@@ -1,17 +1,25 @@
 import { getOrder } from "../api/getOrderApi";
 import { useEffect, useState } from "react";
+import Loading from "../components/Loading";
+import { setIsLoading } from "../redux/loading/loadingSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const MyOrders = () => {
+  const isLoading = useSelector((state) => state.loading.isLoading);
   const [data, setData] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getOrder("").then((res) => setData(res));
-  }, []);
+    dispatch(setIsLoading("pending"));
+    getOrder("")
+      .then((res) => setData(res))
+      .finally(() => dispatch(setIsLoading("fulfilled")));
+  }, [dispatch]);
 
   return (
     <>
-      {console.log(data)}
-      {!data ? (
+      {(isLoading === "initial" || isLoading === "pending") && <Loading/>}
+      {(!data && isLoading) === "fulfilled" ? (
         <div className="flex-1 flex items-center justify-center">
           Görüntülenecek siparişiniz bulunmamaktadır.
         </div>
