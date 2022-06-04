@@ -1,4 +1,3 @@
-import Sidebar from "../../components/sidebar/Sidebar";
 import "./home.scss";
 import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";

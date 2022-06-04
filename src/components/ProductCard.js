@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ImageModal from "../components/ImageModal";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useDispatch } from "react-redux";
@@ -12,6 +14,13 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { ProductObj } from "../utils/productObj";
+import useAuth from "../hooks/useAuth";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { updateProduct } from "../api/productApi";
+import { deleteProduct } from "../api/productApi";
+
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 let initialImageModalVisibility = false;
 
@@ -20,7 +29,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 700,
   bgcolor: "background.paper",
   border: "0",
   boxShadow: 24,
@@ -28,11 +37,24 @@ const style = {
 };
 
 const ProductCard = ({ item }) => {
+  const [productDetail, setProductDetail] = useState({
+    categories: item.categories,
+    categoriesValue: "",
+    size: item.size,
+    sizeValue: "",
+    color: item.color,
+    colorValue: "",
+  });
   const [isImageModal, setIsImageModal] = useState(initialImageModalVisibility);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
+  const [openUpdate, setOpenUpdate] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+    setOpenUpdate(false);
+  };
+  const auth = useAuth();
 
   const handleOpen = () => {
     formik.setValues({
@@ -42,6 +64,79 @@ const ProductCard = ({ item }) => {
     formik.setErrors({});
     setOpen(true);
   };
+
+  const handleOpenUpdate = () => {
+    setOpenUpdate(true);
+  };
+
+  //Set array values of formik
+  const handleChange = (val, key) => {
+    const payload = { ...productDetail };
+    payload[key].push(val);
+    setProductDetail(payload);
+    formik.setValues({ ...formik.values, [key]: payload[key] });
+  };
+
+  //Set input values of state
+  const handleValue = (state, val) => {
+    const payload = { ...productDetail };
+    payload[state] = val;
+    setProductDetail(payload);
+  };
+
+  //Remove item from state
+  const removeItem = (val, key) => {
+    let payload = { ...productDetail };
+    payload[key] = payload[key].filter((item) => item !== val);
+    setProductDetail(payload);
+    formik2.setValues({ ...formik2.values, [key]: payload[key] });
+  };
+
+  const handleDeleteProduct = async () => {
+    const res = await deleteProduct(item._id);
+    window.location.reload();
+    console.log(res);
+  };
+
+  const validate2 = Yup.object({
+    title: Yup.string().required("Title required"),
+    description: Yup.string().required("Description required"),
+    image: Yup.string().required("Image required"),
+    categories: Yup.array().required("Categories required").nullable(),
+    size: Yup.array().required("Size required").nullable(),
+    color: Yup.array().required("Color required").nullable(),
+    price: Yup.number()
+      .positive("Price must be positive")
+      .required("Price required"),
+    stock: Yup.number()
+      .positive("Stock must be positive")
+      .required("Stock required"),
+    inStock: Yup.bool().required("In Stock required"),
+    brand: Yup.string().required("Brand required"),
+  });
+
+  const formik2 = useFormik({
+    initialValues: {
+      title: item.title,
+      description: item.description,
+      image: item.image,
+      categories: item.categories,
+      size: item.size,
+      color: item.color,
+      price: item.price,
+      stock: item.stock,
+      inStock: item.inStock,
+      brand: item.brand,
+    },
+    validationSchema: validate2,
+    onSubmit: async (values) => {
+      const res = await updateProduct(values, item._id);
+      console.log(res);
+      window.location.reload();
+    },
+    validateOnChange: false,
+    validateOnBlur: false,
+  });
 
   //Validation schema
   const validate = Yup.object({
@@ -67,6 +162,13 @@ const ProductCard = ({ item }) => {
   const setInputValue = (key, value) => {
     formik.setValues({
       ...formik.values,
+      [key]: value,
+    });
+  };
+
+  const setInputValue2 = (key, value) => {
+    formik2.setValues({
+      ...formik2.values,
       [key]: value,
     });
   };
@@ -135,26 +237,8 @@ const ProductCard = ({ item }) => {
                 onChange={(e) => setInputValue("size", e.target.value)}
               >
                 {item?.size?.map((item, idx) => (
-                  <MenuItem
-                    value={
-                      item.name +
-                      " - " +
-                      item.height +
-                      " x " +
-                      item.width +
-                      " " +
-                      item.depth
-                    }
-                    id={idx}
-                    key={idx}
-                  >
-                    {item.name +
-                      " - " +
-                      item.height +
-                      " x " +
-                      item.width +
-                      " " +
-                      item.depth}
+                  <MenuItem value={item} id={idx} key={idx}>
+                    {item}
                   </MenuItem>
                 ))}
               </Select>
@@ -168,6 +252,189 @@ const ProductCard = ({ item }) => {
             >
               Sepete ekle
             </button>
+          </form>
+        </Box>
+      </Modal>
+      <Modal
+        open={openUpdate}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        className={"flex flex-col gap-y-4"}
+      >
+        <Box sx={style}>
+          <form
+            className=" p-8 items-center justify-center h-full flex flex-col"
+            onSubmit={formik2.handleSubmit}
+          >
+            <div className="flex gap-x-20">
+              <div className="flex flex-col gap-y-4">
+                <TextField
+                  error={Object.keys(formik2.errors).length > 0}
+                  id="outlined-error-helper-text-1"
+                  value={formik2.values.title}
+                  label="Title"
+                  onChange={(e) => setInputValue2("title", e.target.value)}
+                  helperText={formik2.errors.title}
+                />
+                <TextField
+                  error={Object.keys(formik2.errors).length > 0}
+                  id="outlined-error-helper-text-1"
+                  value={formik2.values.description}
+                  label="Description"
+                  onChange={(e) =>
+                    setInputValue2("description", e.target.value)
+                  }
+                  helperText={formik2.errors.description}
+                />
+
+                <TextField
+                  error={Object.keys(formik2.errors).length > 0}
+                  id="outlined-error-helper-text-1"
+                  value={formik2.values.image}
+                  label="Image Link"
+                  onChange={(e) => setInputValue2("image", e.target.value)}
+                  helperText={formik2.errors.image}
+                />
+
+                <div className="flex items-center gap-x-4">
+                  <TextField
+                    error={Object.keys(formik2.errors).length > 0}
+                    id="outlined-error-helper-text-1"
+                    value={productDetail.categoriesValue}
+                    label="Categories"
+                    onChange={(e) =>
+                      handleValue("categoriesValue", e.target.value)
+                    }
+                    helperText={formik2.errors.categories}
+                  />
+                  <Button
+                    variant="contained"
+                    onClick={() =>
+                      handleChange(productDetail.categoriesValue, "categories")
+                    }
+                  >
+                    Add Categories
+                  </Button>
+                </div>
+                <ul>
+                  {productDetail.categories.map((item, idx) => (
+                    <li key={idx} className="flex">
+                      <span>{item}</span>
+                      <RemoveCircleIcon
+                        className="text-red-400 hover:cursor-pointer"
+                        onClick={() => removeItem(item, "categories")}
+                      />
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex items-center gap-x-4">
+                  <TextField
+                    error={Object.keys(formik2.errors).length > 0}
+                    id="outlined-error-helper-text-1"
+                    value={productDetail.sizeValue}
+                    label="Size"
+                    onChange={(e) => handleValue("sizeValue", e.target.value)}
+                    helperText={formik2.errors.size}
+                  />
+                  <Button
+                    variant="contained"
+                    onClick={() =>
+                      handleChange(productDetail.sizeValue, "size")
+                    }
+                  >
+                    Add Size
+                  </Button>
+                </div>
+                <ul>
+                  {productDetail.size.map((item, idx) => (
+                    <li key={idx} className="flex">
+                      <span>{item}</span>
+                      <RemoveCircleIcon
+                        className="text-red-400 hover:cursor-pointer"
+                        onClick={() => removeItem(item, "size")}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-col gap-y-4">
+                <div className="flex items-center gap-x-4">
+                  <TextField
+                    error={Object.keys(formik2.errors).length > 0}
+                    id="outlined-error-helper-text-1"
+                    value={productDetail.colorValue}
+                    label="Color"
+                    onChange={(e) => handleValue("colorValue", e.target.value)}
+                    helperText={formik2.errors.color}
+                  />
+                  <Button
+                    variant="contained"
+                    onClick={() =>
+                      handleChange(productDetail.colorValue, "color")
+                    }
+                  >
+                    Add Colors
+                  </Button>
+                </div>
+                <ul>
+                  {productDetail.color.map((item, idx) => (
+                    <li key={idx} className="flex">
+                      <span>{item}</span>
+                      <RemoveCircleIcon
+                        className="text-red-400 hover:cursor-pointer"
+                        onClick={() => removeItem(item, "color")}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                <TextField
+                  error={Object.keys(formik2.errors).length > 0}
+                  id="outlined-error-helper-text-1"
+                  value={formik2.values.price}
+                  label="Price"
+                  onChange={(e) =>
+                    setInputValue2("price", Number(e.target.value))
+                  }
+                  helperText={formik2.errors.price}
+                />
+
+                <TextField
+                  error={Object.keys(formik2.errors).length > 0}
+                  id="outlined-error-helper-text-1"
+                  value={formik2.values.stock}
+                  label="Stock"
+                  onChange={(e) =>
+                    setInputValue2("stock", Number(e.target.value))
+                  }
+                  helperText={formik2.errors.stock}
+                />
+
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={formik2.values.inStock}
+                  label="In Stock"
+                  onChange={(e) => setInputValue2("inStock", e.target.value)}
+                >
+                  <MenuItem value={true}>True</MenuItem>
+                  <MenuItem value={false}>False</MenuItem>
+                </Select>
+
+                <TextField
+                  error={Object.keys(formik2.errors).length > 0}
+                  id="outlined-error-helper-text-1"
+                  value={formik2.values.brand}
+                  label="Brand"
+                  onChange={(e) => setInputValue2("brand", e.target.value)}
+                  helperText={formik2.errors.brand}
+                />
+              </div>
+            </div>
+            <Button type="submit" className="cavalier-btn-primary mt-12 w-1/3">
+              Update Product
+            </Button>
           </form>
         </Box>
       </Modal>
@@ -193,6 +460,24 @@ const ProductCard = ({ item }) => {
             >
               <ZoomInIcon />
             </div>
+
+            {auth.isAdmin && (
+              <>
+                <div
+                  onClick={handleOpenUpdate}
+                  className="rounded-full border bg-white hover:bg-slate-200 shadow p-1 "
+                >
+                  <ChangeCircleIcon style={{ fill: "green" }} />
+                </div>
+
+                <div
+                  onClick={handleDeleteProduct}
+                  className="rounded-full border bg-white hover:bg-slate-200 shadow p-1"
+                >
+                  <DeleteIcon style={{ fill: "red" }} />
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div onClick={() => handleClick(item._id)} className="p-4 mt-auto">
