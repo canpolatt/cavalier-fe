@@ -13,6 +13,7 @@ import SignIn from "./pages/SignIn";
 import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import Admin from "./pages/admin/Admin";
+import ListOrders from "./pages/admin/ListOrders";
 import Success from "./pages/Success";
 import Profile from "./pages/Profile";
 import { useDispatch } from "react-redux";
@@ -57,6 +58,16 @@ const App = () => {
             element={
               <ProtectedRoute
                 children={<ProductAdd />}
+                permittedRoles={["ADMIN"]}
+              />
+            }
+          />
+
+          <Route
+            path="/see-orders"
+            element={
+              <ProtectedRoute
+                children={<ListOrders />}
                 permittedRoles={["ADMIN"]}
               />
             }

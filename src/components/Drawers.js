@@ -86,6 +86,17 @@ const Drawers = () => {
                 </ListItemIcon>
                 <ListItemText primary="Ürün Ekleme" />
               </ListItem>
+
+              <ListItem
+                className="text-golden "
+                button
+                onClick={() => navigate("/see-orders")}
+              >
+                <ListItemIcon>
+                  <AddIcon className="text-golden " />
+                </ListItemIcon>
+                <ListItemText primary="Siparişler" />
+              </ListItem>
             </>
           )}
         </div>
