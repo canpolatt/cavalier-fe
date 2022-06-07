@@ -9,11 +9,7 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useState } from "react";
 import { addProduct } from "../../api/productApi";
 
-
-
 export default function ProductAdd() {
-
-
   const [productDetail, setProductDetail] = useState({
     categories: [],
     categoriesValue: "",
@@ -22,7 +18,6 @@ export default function ProductAdd() {
     color: [],
     colorValue: "",
   });
-
 
   //Set array values of formik
   const handleChange = (val, key) => {
