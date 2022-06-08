@@ -4,7 +4,6 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import { useNavigate } from "react-router-dom";
 
 const Widget = ({ type }) => {
   let data;
@@ -12,7 +11,6 @@ const Widget = ({ type }) => {
   //temporary
   const amount = 100;
   const diff = 20;
-  const navigate = useNavigate();
 
   switch (type) {
     case "user":
