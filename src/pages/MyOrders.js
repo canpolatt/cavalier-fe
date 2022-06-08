@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { setIsLoading } from "../redux/loading/loadingSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const MyOrders = () => {
   const isLoading = useSelector((state) => state.loading.isLoading);
   const [data, setData] = useState(null);
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(setIsLoading("pending"));
     getOrder("")
@@ -25,17 +26,12 @@ const MyOrders = () => {
         </div>
       ) : (
         <div className="flex-1">
-          <ul>
+          <ul className="grid grid-cols-2">
             {data?.map((item, idx) => (
-              <li key={idx}>
-                <p>Sipariş Numarası:{item._id}</p>
-                <p>Sipariş Tarihi:{item.createdAt}</p>
-                <p>
-                  Sipariş Durumu:
-                  {item.status === "pending" && "Sipariş Hazırlanıyor"}
-                </p>
-                <p>Sipariş Detayı:{item.products.length} ürün hazırlanıyor.</p>
-                <p>Toplam:{item.totalPrice}₺</p>
+              <li key={idx} className="col-span-1 flex flex-col items-center justify-center border m-4">
+                <p>{t("Order No")} : {item._id}</p>
+                <p>{t("Order Date")} : {item.createdAt.slice(0,10)}</p>
+                <p>{t("Total")}: {item.totalPrice}₺</p>
                 <hr></hr>
               </li>
             ))}

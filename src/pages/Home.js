@@ -15,11 +15,13 @@ import Loading from "../components/Loading";
 import MessageBox from "../components/MessageBox";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsLoading } from "../redux/loading/loadingSlice";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const isLoading = useSelector((state) => state.loading.isLoading);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(setIsLoading("pending"));
@@ -46,8 +48,10 @@ const Home = () => {
               <img loading="lazy" src={SliderImage3} alt={SliderImage3} />
             </SwiperSlide>
           </Swiper>
-          <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">Kategoriler</h2>
-          <Categories slidesPerView={3}/>
+          <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">{`${t(
+            "Categories"
+          )}`}</h2>
+          <Categories slidesPerView={3} />
           <Grid item xs={12} md={12}>
             <img
               loading="lazy"
@@ -65,7 +69,9 @@ const Home = () => {
               md={12}
               style={{ textAlign: "center" }}
             >
-              <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">About Us</h2>
+              <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">
+                {t("About Us")}
+              </h2>
             </Grid>
 
             <Grid
@@ -76,20 +82,15 @@ const Home = () => {
               md={12}
             >
               <p className="mt-4">
-                Cavalier is a Cape Town based interior design studio. We are
-                creators of progressive, elegant furniture and lighting, as well
-                as artisanal objects and contemporary floor art. Our design is
-                inspired by an enquiring contemporary aesthetic and timeless
-                classicism, with a deep respect for natural materials and
-                traditional craftsmanship. We aim to be at the forefront of
-                discerning modern living, and offer a fully comprehensive and
-                bespoke interior design service.
+                {t(
+                  "Cavalier is a Cape Town based interior design studio. We arecreators of progressive, elegant furniture and lighting, as wellas artisanal objects and contemporary floor art. Our design isinspired by an enquiring contemporary aesthetic and timelessclassicism, with a deep respect for natural materials andtraditional craftsmanship. We aim to be at the forefront ofdiscerning modern living, and offer a fully comprehensive andbespoke interior design service."
+                )}
               </p>
               <br />
               <p>
-                Our desire is to continuously explore and refine our aesthetic
-                to better communicate intimate and characterful narratives
-                through the art of design.
+              {
+                t("Our desire is to continuously explore and refine our aestheticto better communicate intimate and characterful narratives through the art of design.")
+              }
               </p>
             </Grid>
             <Grid
@@ -99,9 +100,11 @@ const Home = () => {
               xs={12}
               md={12}
             >
-              <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">Products</h2>
+              <h2 className="text-xl mt-4 md:text-2xl lg:text-4xl text-center">{`${t(
+                "Products"
+              )}`}</h2>
             </Grid>
-            {products?.map((item, idx) => (
+            {products.slice(0,3)?.map((item, idx) => (
               <Grid item xs={12} md={4} className="mb-4 text-center" key={idx}>
                 <img
                   loading="lazy"
@@ -113,7 +116,7 @@ const Home = () => {
               </Grid>
             ))}
           </Grid>
-          <MessageBox/>
+          <MessageBox />
         </Container>
       )}
     </>

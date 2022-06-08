@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import postMessage from "../api/messageApi";
+import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
 
 const phoneRegExp =
@@ -30,6 +31,8 @@ const MessageBox = () => {
       .required("Mesajınızı giriniz."),
   });
 
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validate,
@@ -50,7 +53,7 @@ const MessageBox = () => {
   return (
     <div className="p-8 flex flex-col">
       <h2 className="text-center text-xl mb-8 md:text-2xl lg:text-4xl my-4">
-        Biz Size Ulaşalım
+        {t("Contact")}
       </h2>
       <form
         onSubmit={formik.handleSubmit}
@@ -62,7 +65,7 @@ const MessageBox = () => {
           error={formik.errors.name}
           id="outlined-error-helper-text-1"
           value={formik.values.name}
-          label="Ad"
+          label={`${t("Name")}`}
           onChange={(e) => setInputValue("name", e.target.value)}
           helperText={formik.errors.name}
           sx={{
@@ -88,7 +91,7 @@ const MessageBox = () => {
           error={formik.errors.surname}
           id="outlined-error-helper-text-2"
           value={formik.values.surname}
-          label="Soyad"
+          label={`${t("Surname")}`}
           onChange={(e) => setInputValue("surname", e.target.value)}
           helperText={formik.errors.surname}
           sx={{
@@ -114,7 +117,7 @@ const MessageBox = () => {
           error={formik.errors.phone}
           id="outlined-error-helper-text-3"
           value={formik.values.phone}
-          label="Telefon"
+          label={`${t("Phone")}`}
           onChange={(e) => setInputValue("phone", e.target.value)}
           helperText={formik.errors.phone}
           sx={{
@@ -140,7 +143,7 @@ const MessageBox = () => {
           error={formik.errors.email}
           id="outlined-error-helper-text-4"
           value={formik.values.email}
-          label="Posta Adresi"
+          label={`${t("E-mail Address")}`}
           onChange={(e) => setInputValue("email", e.target.value)}
           helperText={formik.errors.email}
           sx={{
@@ -168,7 +171,7 @@ const MessageBox = () => {
           variant="outlined"
           rows={4}
           id="outlined-error-helper-text-5"
-          label="Mesaj"
+          label={`${t("Message")}`}
           value={formik.values.message}
           onChange={(e) => setInputValue("message", e.target.value)}
           helperText={formik.errors.message}
@@ -195,7 +198,7 @@ const MessageBox = () => {
           type="submit"
           className="border mt-4 w-full md:w-1/4 p-4 bg-golden text-white"
         >
-          Gönder
+          {t("Send")}
         </button>
       </form>
     </div>

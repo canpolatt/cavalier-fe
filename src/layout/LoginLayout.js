@@ -5,7 +5,6 @@ import "../styles/LoginLayout.css";
 const LoginLayout = () => {
   return (
     <div className="login-layout">
-      Login Layout
       <Outlet />
     </div>
   );

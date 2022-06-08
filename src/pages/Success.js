@@ -4,6 +4,7 @@ import { getOrder } from "../api/getOrderApi";
 import Loading from "../components/Loading";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsLoading } from "../redux/loading/loadingSlice";
+import { useTranslation } from "react-i18next";
 
 const Success = () => {
   const location = useLocation();
@@ -12,6 +13,7 @@ const Success = () => {
   const [orderDetails, setOrderDetails] = useState();
   const isLoading = useSelector((state) => state.loading.isLoading);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(setIsLoading("pending"));
@@ -29,7 +31,7 @@ const Success = () => {
         <Loading />
       ) : (
         <div className="flex-1 p-8 flex flex-col items-center gap-y-16">
-          <h2 className="text-3xl text-center">SİPARİŞİNİZ TAMAMLANDI</h2>
+          <h2 className="text-3xl text-center">{t("Order Completed")}</h2>
           <ul>
             {orderDetails?.map((item) => {
               return (
@@ -38,14 +40,14 @@ const Success = () => {
                   key={item._id}
                 >
                   <label className="text-2xl p-2 text-golden">
-                    Sipariş Numaranız:
+                    {t("Order No")} :
                   </label>
                   <span className="text-xl">{item._id}</span>
                   <label className="text-2xl p-2 text-golden">
-                    Sipariş Oluşturulma Tarihi:
+                    {t("Order Date")} :
                   </label>
                   <span className="text-xl">{item.createdAt.slice(0, 10)}</span>
-                  <label className="text-2xl p-2 text-golden">Ürünler:</label>
+                  <label className="text-2xl p-2 text-golden">{t("All Products")} :</label>
                   <ul className="text-xl flex flex-col">
                     {item.products.map((product) => (
                       <li key={product._id}>
@@ -54,13 +56,7 @@ const Success = () => {
                     ))}
                   </ul>
                   <label className="text-2xl p-2 text-golden">
-                    Sipariş Durumu:
-                  </label>
-                  <span className="text-xl">
-                    {item.status === "pending" && "Sipariş Hazırlanıyor"}
-                  </span>
-                  <label className="text-2xl p-2 text-golden">
-                    Toplam Tutar:{" "}
+                    {t("Total")} : {" "}
                   </label>
                   <span className="text-xl">₺{item.totalPrice}.00</span>
                 </li>
@@ -71,7 +67,7 @@ const Success = () => {
             onClick={() => navigate("/")}
             className="rounded-lg p-4 mx-1 bg-golden text-white font-bold"
           >
-            ALIŞVERİŞE DEVAM ET
+            {t("Continue Shopping")}
           </button>
         </div>
       )}

@@ -5,6 +5,7 @@ import updateUser from "../api/updateUserApi";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { setName } from "../redux/user/userSlice";
+import { useTranslation } from "react-i18next";
 
 const initialValues = {
   name: "",
@@ -20,7 +21,7 @@ const Profile = () => {
   const user = useAuth();
   const dispatch = useDispatch();
   const isLoggedIn = localStorage.getItem("accessToken");
-
+  const { t } = useTranslation();
   const validate = Yup.object({
     name: Yup.string().required("Lütfen adınızı giriniz."),
     surname: Yup.string().required("Lütfen soyadınızı giriniz."),
@@ -80,11 +81,11 @@ const Profile = () => {
       {isLoggedIn ? (
         <div>
           <h2 className=" text-xl lg:text-3xl font-semibold">
-            Merhaba {user.name},
+            {t("Hello")} {user.name},
           </h2>
           <div className="flex flex-col w-full lg:flex-row">
             <div className="lg:w-1/2 p-4">
-              <h3 className="mb-4 lg:mb-8 lg:text-xl">Üyelik Bilgilerim</h3>
+              <h3 className="mb-4 lg:mb-8 lg:text-xl">{t("Account Information")}</h3>
               <form
                 onSubmit={infoFormik.handleSubmit}
                 className="p-8 flex flex-col gap-4 border"
@@ -95,7 +96,7 @@ const Profile = () => {
                   error={infoFormik.errors.name && infoFormik.touched.name}
                   id="outlined-error-helper-text-1"
                   value={infoFormik.values.name}
-                  label="Ad"
+                  label={t("Name")}
                   onChange={(e) => setInputValue("name", e.target.value)}
                   helperText={infoFormik.errors.name}
                   sx={{
@@ -123,7 +124,7 @@ const Profile = () => {
                   }
                   id="outlined-error-helper-text-2"
                   value={infoFormik.values.surname}
-                  label="Soyad"
+                  label={t("Surname")}
                   onChange={(e) => setInputValue("surname", e.target.value)}
                   helperText={infoFormik.errors.surname}
                   sx={{
@@ -147,12 +148,12 @@ const Profile = () => {
                   type="submit"
                   className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
                 >
-                  KAYDET
+                  {t("Save")}
                 </button>
               </form>
             </div>
             <div className="lg:w-1/2 p-4">
-              <h3 className="mb-4 lg:mb-8 lg:text-xl">Şifre Güncelleme</h3>
+              <h3 className="mb-4 lg:mb-8 lg:text-xl">{t("Password")} {t("Update")}</h3>
               <form
                 onSubmit={passFormik.handleSubmit}
                 className="p-8 flex flex-col gap-4 border"
@@ -165,7 +166,7 @@ const Profile = () => {
                   }
                   id="outlined-error-helper-text-3"
                   value={passFormik.values.password}
-                  label="Yeni Şifre"
+                  label={`${t("New")} ${t("Password")}`}
                   type="password"
                   onChange={(e) =>
                     setPassInputValue("password", e.target.value)
@@ -197,7 +198,7 @@ const Profile = () => {
                   }
                   id="outlined-error-helper-text-4"
                   value={passFormik.values.confirmPassword}
-                  label="Yeni Şifre (Tekrar)"
+                  label={`${t("New")} ${t("Password")} (${t("Again")})`}
                   type="password"
                   onChange={(e) =>
                     setPassInputValue("confirmPassword", e.target.value)
@@ -224,7 +225,7 @@ const Profile = () => {
                   type="submit"
                   className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
                 >
-                  GÜNCELLE
+                  {t("Update")}
                 </button>
               </form>
             </div>

@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { addCart } from "../redux/shoppingCart/shoppingCartSlice";
 import { ProductObj } from "../utils/productObj";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ProductDetail = () => {
   const { product_id } = useParams();
@@ -18,7 +19,7 @@ const ProductDetail = () => {
   const isLoading = useSelector((state) => state.loading.isLoading);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { t } = useTranslation();
   //Validation schema
   const validate = Yup.object({
     size: Yup.string().required("Size required"),
@@ -94,7 +95,7 @@ const ProductDetail = () => {
                   </h3>
                   <p className="py-2">{details.description}</p>
                   <span className="flex gap-x-2 items-center">
-                    <h1>Ürün tipi: </h1>
+                    <h1>{`${t("Product Type")} :`} </h1>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -112,13 +113,13 @@ const ProductDetail = () => {
                       {formik.errors.size}
                     </small>
                   </span>
-                  <p className="py-1">Marka : {details.brand}</p>
-                  <p className="py-1">Stok adedi : {details.stock}</p>
+                  <p className="py-1">{t("Brand")} : {details.brand}</p>
+                  <p className="py-1">{t("Stock")} : {details.stock}</p>
                   <p className="py-1">
-                    {details.inStock && "Stok durumu : var"}
+                    {details.inStock && `${t("In Stock")} : ${t("Yes")}`}
                   </p>
                   <ul className="flex items-center py-2">
-                    <label>Renk Seçenekleri:</label>
+                    <label>{t("Color")} :</label>
                     {details?.color?.map((item, idx) => (
                       <li
                         className={`rounded-full  w-8 h-8 ml-2 hover:cursor-pointer ${
@@ -158,7 +159,7 @@ const ProductDetail = () => {
                   className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
                 >
                   {" "}
-                  SEPETE EKLE{" "}
+                  {t("Add to Cart")}{" "}
                 </button>
               </div>
             </div>
