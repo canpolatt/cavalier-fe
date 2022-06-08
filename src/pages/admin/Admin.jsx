@@ -6,11 +6,13 @@ import Table from "../../components/table/Table";
 import { useEffect, useState } from "react";
 import { getMessage } from "../../api/messageApi";
 import { getChartIncome } from "../../api/chartApi";
+import {useNavigate} from "react-router-dom";
 
 const Admin = () => {
   const [messages, setMessages] = useState([]);
   const [chartIncome, setChartIncome] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([getMessage(), getChartIncome()])
@@ -30,7 +32,7 @@ const Admin = () => {
  
         <div className="widgets">
           <Widget type="user" />
-          <Widget type="order" />
+          <Widget type="order"/>
           <Widget type="earning" />
           <Widget type="balance" />
         </div>
