@@ -11,6 +11,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { login } from "../redux/user/userApi";
+import { useTranslation } from "react-i18next";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const SignIn = () => {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   //Validation schema
   const validate = Yup.object({
@@ -95,13 +97,13 @@ const SignIn = () => {
   return (
     <>
       <div className="form-wrapper">
-        <h2>Cavalier Mobilya</h2>
+        <h2>Cavalier</h2>
         <form className="form" onSubmit={formik.handleSubmit}>
           <TextField
             error={Object.keys(formik.errors).length > 0}
             id="outlined-error-helper-text-1"
             value={formik.values.email}
-            label="Email"
+            label={`${t("E-mail Address")}`}
             sx={{
               "& label.Mui-focused": {
                 color: "#a08862",
@@ -124,8 +126,7 @@ const SignIn = () => {
           <TextField
             error={Object.keys(formik.errors).length > 0}
             id="outlined-error-helper-text-2"
-            value={formik.values.password}
-            label="Password"
+            label={`${t("Password")}`}
             sx={{
               "& label.Mui-focused": {
                 color: "#a08862",
@@ -172,16 +173,16 @@ const SignIn = () => {
                 },
               }}
             />
-            <p>Remember me</p>
+            <p>{t("Remember me")}</p>
           </div>
 
           <Button type="submit" className="cavalier-btn-primary">
-            Log In
+            {t("Log In")}
           </Button>
           <div>
-            <a className="hover:text-golden hover:underline" href="/register">
-              Don't have a account?
-            </a>
+            <p className="hover:text-golden hover:underline cursor-pointer" onClick={() => navigate("/register")}>
+              {t("Don't have a account?")}
+            </p>
           </div>
         </form>
       </div>

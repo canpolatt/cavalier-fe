@@ -19,7 +19,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { updateProduct } from "../api/productApi";
 import { deleteProduct } from "../api/productApi";
-
+import { useTranslation } from "react-i18next";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 let initialImageModalVisibility = false;
@@ -45,6 +45,7 @@ const ProductCard = ({ item }) => {
     color: item.color,
     colorValue: "",
   });
+  const { t } = useTranslation();
   const [isImageModal, setIsImageModal] = useState(initialImageModalVisibility);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -207,7 +208,7 @@ const ProductCard = ({ item }) => {
           <form onSubmit={formik.handleSubmit}>
             <span className="flex flex-col gap-y-2">
               <ul className="flex items-center py-2">
-                <label>Renk Seçenekleri:</label>
+                <label>{`${t("Color")} :`}</label>
                 {item?.color?.map((item, idx) => (
                   <li
                     className={` rounded-full  w-8 h-8 ml-2 hover:cursor-pointer ${
@@ -228,7 +229,7 @@ const ProductCard = ({ item }) => {
             </span>
 
             <span className="flex flex-col gap-y-2 mt-4">
-              <h1>Boyutlar</h1>
+              <label>{`${t("Size")} :`}</label>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -250,7 +251,7 @@ const ProductCard = ({ item }) => {
               className="mt-4 w-full rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
               type="submit"
             >
-              Sepete ekle
+              {t("Add to Cart")}
             </button>
           </form>
         </Box>

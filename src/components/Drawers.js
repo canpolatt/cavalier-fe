@@ -17,9 +17,11 @@ import useAuth from "../hooks/useAuth";
 import TurkeyFlag from "../assets/turkey.svg";
 import USAFlag from "../assets/united-states.svg";
 import RussiaFlag from "../assets/russia.svg";
+import { useTranslation } from "react-i18next";
 
 const Drawers = () => {
   const auth = useAuth();
+  const { t } = useTranslation();
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -54,13 +56,15 @@ const Drawers = () => {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Anasayfa" />
+            <ListItemText>
+            <ListItemText primary={`${t("Home")}`} />
+            </ListItemText>
           </ListItem>
           <ListItem button onClick={() => navigate("/products")}>
             <ListItemIcon>
               <ChairIcon />
             </ListItemIcon>
-            <ListItemText primary="Ürünler" />
+            <ListItemText primary={`${t("Products")}`} />
           </ListItem>
 
           {auth.isAdmin && (
@@ -96,6 +100,17 @@ const Drawers = () => {
                   <AddIcon className="text-golden " />
                 </ListItemIcon>
                 <ListItemText primary="Siparişler" />
+              </ListItem>
+
+              <ListItem
+                className="text-golden "
+                button
+                onClick={() => navigate("/add-category")}
+              >
+                <ListItemIcon>
+                  <AddIcon className="text-golden " />
+                </ListItemIcon>
+                <ListItemText primary="Kategori Ekle" />
               </ListItem>
             </>
           )}

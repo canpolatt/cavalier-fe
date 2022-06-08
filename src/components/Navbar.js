@@ -148,11 +148,11 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={() => handleClick("profile")}>Profil</MenuItem>
+              <MenuItem onClick={() => handleClick("profile")}>{t("Profile")}</MenuItem>
               <MenuItem onClick={() => handleClick("myorders")}>
-                Siparişlerim
+                {t("My Orders")}
               </MenuItem>
-              <MenuItem onClick={handleLogout}>Çıkış yap</MenuItem>
+              <MenuItem onClick={handleLogout}>{t("Log Out")}</MenuItem>
             </Menu>
           </div>
         )}

@@ -5,13 +5,14 @@ import {
 } from "../redux/shoppingCart/shoppingCartSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.products);
   const total = useSelector((state) => state.cart.total);
-  const quantity = useSelector((state) => state.cart.quantity);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleClick = (item, calc) => {
     if (calc === "dec") {
@@ -60,14 +61,14 @@ const Cart = () => {
                         {item.description.slice(0, 40) + "..."}
                       </p>
                       <div className="flex gap-2">
-                        <label className="text-sm">Renk:</label>
+                        <label className="text-sm">{t("Color")}:</label>
                         <div
                           className={`rounded-full w-6 h-6`}
                           style={{ backgroundColor: `${item.color}` }}
                         ></div>
                       </div>
                       <div className="flex items-center gap-x-2">
-                        <label className="text-sm">Boyut:</label>
+                        <label className="text-sm">{t("Size")}:</label>
                         <p className="text-xs lg:text-md ">{item.size}</p>
                       </div>
                     </div>
@@ -103,7 +104,6 @@ const Cart = () => {
           <div className="rounded-tl-lg rounded-tr-lg drop-shadow-2xl fixed bottom-0 bg-jet w-full flex items-center h-14">
             <p className="flex-1 text-center p-2 mx-1 font-bold text-white flex flex-col">
               {"₺" + total + ".00"}
-              <span>{quantity + " adet ürün"}</span>
             </p>
 
             <button
@@ -111,7 +111,7 @@ const Cart = () => {
               className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
             >
               {" "}
-              SEPETİ ONAYLA{" "}
+              {t("Confirm Cart")}{" "}
             </button>
           </div>
         </div>

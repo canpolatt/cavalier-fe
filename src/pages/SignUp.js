@@ -5,9 +5,11 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { register } from "../redux/user/userApi";
 import {useNavigate} from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   //Validation schema
   const validate = Yup.object({
     name: Yup.string("Name reqired"),
@@ -47,13 +49,13 @@ export default function SignUp() {
   return (
     <>
       <div className="form-wrapper">
-        <h2>Cavalier Mobilya</h2>
+        <h2>Cavalier</h2>
         <form className="form" onSubmit={formik.handleSubmit}>
           <TextField
             error={Object.keys(formik.errors).length > 0}
             id="outlined-error-helper-text-1"
             value={formik.values.name}
-            label="Name"
+            label={t("Name")}
             sx={{
               "& label.Mui-focused": {
                 color: "#a08862",
@@ -77,7 +79,7 @@ export default function SignUp() {
             error={Object.keys(formik.errors).length > 0}
             id="outlined-error-helper-text-2"
             value={formik.values.surname}
-            label="Surname"
+            label={t("Surname")}
             sx={{
               "& label.Mui-focused": {
                 color: "#a08862",
@@ -101,7 +103,7 @@ export default function SignUp() {
             error={Object.keys(formik.errors).length > 0}
             id="outlined-error-helper-text-3"
             value={formik.values.email}
-            label="Email"
+            label={t("E-mail Address")}
             sx={{
               "& label.Mui-focused": {
                 color: "#a08862",
@@ -126,7 +128,7 @@ export default function SignUp() {
             error={Object.keys(formik.errors).length > 0}
             id="outlined-error-helper-text-4"
             value={formik.values.password}
-            label="Password"
+            label={t("Password")}
             sx={{
               "& label.Mui-focused": {
                 color: "#a08862",
@@ -149,7 +151,7 @@ export default function SignUp() {
           />
 
           <Button type="submit" className="cavalier-btn-primary">
-            Sign Up
+            {t("Sign Up")}
           </Button>
         </form>
       </div>

@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -37,7 +38,7 @@ export default function Order() {
       .max(255, "Maksimum 255 karakter geçerlidir.")
       .required("Adresinizi giriniz."),
   });
-
+  const { t } = useTranslation();
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validate,
@@ -51,7 +52,7 @@ export default function Order() {
         .then(
           (res) =>
             res.status === 200 &&
-            navigate("success/"+res.data._id, { state: res.status })
+            navigate("success/" + res.data._id, { state: res.status })
         )
         .then(() => dispatch(backToInitialState()));
     },
@@ -76,7 +77,7 @@ export default function Order() {
     <div className="flex-1">
       <div className="p-8 flex flex-col">
         <h2 className="text-center text-xl mb-8 md:text-2xl lg:text-4xl my-4">
-          Teslimat Bilgileriniz
+          {t("Your Delivery Information")}
         </h2>
         <form
           onSubmit={formik.handleSubmit}
@@ -88,7 +89,7 @@ export default function Order() {
             error={formik.errors.name}
             id="outlined-error-helper-text-1"
             value={formik.values.name}
-            label="Ad"
+            label={t("Name")}
             onChange={(e) => setInputValue("name", e.target.value)}
             helperText={formik.errors.name}
             sx={{
@@ -114,7 +115,7 @@ export default function Order() {
             error={formik.errors.surname}
             id="outlined-error-helper-text-2"
             value={formik.values.surname}
-            label="Soyad"
+            label={t("Surname")}
             onChange={(e) => setInputValue("surname", e.target.value)}
             helperText={formik.errors.surname}
             sx={{
@@ -140,7 +141,7 @@ export default function Order() {
             error={formik.errors.phone}
             id="outlined-error-helper-text-3"
             value={formik.values.phone}
-            label="Telefon"
+            label={t("Phone")}
             onChange={(e) => setInputValue("phone", e.target.value)}
             helperText={formik.errors.phone}
             sx={{
@@ -166,7 +167,7 @@ export default function Order() {
             error={formik.errors.email}
             id="outlined-error-helper-text-4"
             value={formik.values.email}
-            label="Posta Adresi"
+            label={t("E-mail Address")}
             onChange={(e) => setInputValue("email", e.target.value)}
             helperText={formik.errors.email}
             sx={{
@@ -194,7 +195,7 @@ export default function Order() {
             variant="outlined"
             rows={4}
             id="outlined-error-helper-text-5"
-            label="Adres"
+            label={t("Address")}
             value={formik.values.address}
             onChange={(e) => setInputValue("address", e.target.value)}
             helperText={formik.errors.address}
@@ -223,7 +224,7 @@ export default function Order() {
             className="rounded-lg flex-[2_2_0%] p-2 mx-1 bg-golden text-white font-bold"
           >
             {" "}
-            SİPARİŞİ TAMAMLA{" "}
+            {t("Complete Order")}{" "}
           </button>
         </form>
       </div>

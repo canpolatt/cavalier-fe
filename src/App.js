@@ -21,6 +21,7 @@ import { fillWithCookie } from "./redux/shoppingCart/shoppingCartSlice";
 import MyOrders from "./pages/MyOrders";
 import ProductAdd from "./pages/admin/ProductAdd";
 import SignUp from "./pages/SignUp";
+import CategoryAdd from "./pages/admin/CategoryAdd";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,16 @@ const App = () => {
             element={
               <ProtectedRoute
                 children={<ListOrders />}
+                permittedRoles={["ADMIN"]}
+              />
+            }
+          />
+
+          <Route
+            path="/add-category"
+            element={
+              <ProtectedRoute
+                children={<CategoryAdd />}
                 permittedRoles={["ADMIN"]}
               />
             }
