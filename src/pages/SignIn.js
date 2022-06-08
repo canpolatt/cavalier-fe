@@ -178,6 +178,11 @@ const SignIn = () => {
           <Button type="submit" className="cavalier-btn-primary">
             Log In
           </Button>
+          <div>
+            <a className="hover:text-golden hover:underline" href="/register">
+              Don't have a account?
+            </a>
+          </div>
         </form>
       </div>
       <Snackbar

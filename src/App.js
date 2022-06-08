@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import { fillWithCookie } from "./redux/shoppingCart/shoppingCartSlice";
 import MyOrders from "./pages/MyOrders";
 import ProductAdd from "./pages/admin/ProductAdd";
+import SignUp from "./pages/SignUp";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const App = () => {
       <Routes>
         <Route element={<LoginLayout />}>
           <Route path="/login" element={<SignIn />} />
+          <Route path="/register" element={<SignUp />} />
         </Route>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
