@@ -13,6 +13,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import Helper from "../utils/Helper";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import AddIcon from "@mui/icons-material/Add";
+import SellIcon from "@mui/icons-material/Sell";
 import useAuth from "../hooks/useAuth";
 import TurkeyFlag from "../assets/turkey.svg";
 import USAFlag from "../assets/united-states.svg";
@@ -93,7 +94,7 @@ const Drawers = () => {
                 onClick={() => navigate("/see-orders")}
               >
                 <ListItemIcon>
-                  <AddIcon className="text-golden " />
+                  <SellIcon className="text-golden " />
                 </ListItemIcon>
                 <ListItemText primary="Siparişler" />
               </ListItem>
