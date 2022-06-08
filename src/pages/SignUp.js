@@ -4,8 +4,10 @@ import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { register } from "../redux/user/userApi";
+import {useNavigate} from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   //Validation schema
   const validate = Yup.object({
     name: Yup.string("Name reqired"),
@@ -26,8 +28,9 @@ export default function SignUp() {
     },
     validationSchema: validate,
     onSubmit: async (values) => {
+      formik.setValues(formik.initialValues);
       const res = await register(values);
-      console.log(res);
+      res && navigate("/login");
     },
     validateOnChange: false,
     validateOnBlur: false,
@@ -72,7 +75,7 @@ export default function SignUp() {
           />
           <TextField
             error={Object.keys(formik.errors).length > 0}
-            id="outlined-error-helper-text-1"
+            id="outlined-error-helper-text-2"
             value={formik.values.surname}
             label="Surname"
             sx={{
@@ -96,7 +99,7 @@ export default function SignUp() {
           />
           <TextField
             error={Object.keys(formik.errors).length > 0}
-            id="outlined-error-helper-text-1"
+            id="outlined-error-helper-text-3"
             value={formik.values.email}
             label="Email"
             sx={{
@@ -121,7 +124,7 @@ export default function SignUp() {
 
           <TextField
             error={Object.keys(formik.errors).length > 0}
-            id="outlined-error-helper-text-1"
+            id="outlined-error-helper-text-4"
             value={formik.values.password}
             label="Password"
             sx={{

@@ -15,7 +15,7 @@ const ListOrders = () => {
       </h2>
       <ul className="p-8">
         <div className="grid grid-cols-2">
-          {orders.reverse().map((item, idx) => (
+          {orders?.reverse().map((item, idx) => (
             <div className="col-span-1 border p-4">
               <li className="mb-10">
                 <p>Müşteri numarası: {item.userId}</p>
