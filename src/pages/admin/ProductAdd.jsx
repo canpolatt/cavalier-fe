@@ -1,5 +1,4 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
@@ -8,10 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import * as Yup from "yup";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useState } from "react";
-
-const Input = styled("input")({
-  display: "none",
-});
+import { addProduct } from "../../api/productApi";
 
 export default function ProductAdd() {
   const [productDetail, setProductDetail] = useState({
@@ -75,12 +71,13 @@ export default function ProductAdd() {
       color: [],
       price: 0,
       stock: 0,
-      inStock: false,
+      inStock: true,
       brand: "",
     },
     validationSchema: validate,
     onSubmit: async (values) => {
-      console.log(values);
+      const res = await addProduct(values);
+      console.log(res);
     },
     validateOnChange: false,
     validateOnBlur: false,
@@ -120,19 +117,29 @@ export default function ProductAdd() {
               helperText={formik.errors.description}
             />
 
-            <label htmlFor="contained-button-file">
+            {/* <label htmlFor="contained-button-file">
               <Input
                 accept="image/*"
                 id="contained-button-file"
-                value={formik.values.image}
                 multiple
+                //value={formik.values.image}
                 type="file"
-                onChange={(e) => setInputValue("image", e.target.value)}
+                //onChange={(e) => setInputValue("image", e.target.files[0])}
+                onChange={changeHandler}
               />
               <Button variant="contained" component="span">
                 Upload
               </Button>
-            </label>
+            </label> */}
+
+            <TextField
+              error={Object.keys(formik.errors).length > 0}
+              id="outlined-error-helper-text-1"
+              value={formik.values.image}
+              label="Image Link"
+              onChange={(e) => setInputValue("image", e.target.value)}
+              helperText={formik.errors.image}
+            />
 
             <div className="flex items-center gap-x-4">
               <TextField
@@ -225,7 +232,7 @@ export default function ProductAdd() {
               id="outlined-error-helper-text-1"
               value={formik.values.price}
               label="Price"
-              onChange={(e) => setInputValue("price", e.target.value)}
+              onChange={(e) => setInputValue("price", Number(e.target.value))}
               helperText={formik.errors.price}
             />
 
@@ -234,7 +241,7 @@ export default function ProductAdd() {
               id="outlined-error-helper-text-1"
               value={formik.values.stock}
               label="Stock"
-              onChange={(e) => setInputValue("stock", e.target.value)}
+              onChange={(e) => setInputValue("stock", Number(e.target.value))}
               helperText={formik.errors.stock}
             />
 
