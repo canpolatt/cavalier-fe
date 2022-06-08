@@ -9,44 +9,44 @@ const ListOrders = () => {
   }, []);
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 ">
       <h2 className="text-center p-4 text-4xl">
         Siparişleriniz Aşağıda Görüntülenmektedir.
       </h2>
       <ul className="p-8">
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 gap-3">
           {orders?.reverse().map((item, idx) => (
-            <div className="col-span-1 border p-4">
+            <div className="col-span-1 border-4 p-4">
               <li className="mb-10">
-                <p>Müşteri numarası: {item.userId}</p>
-                <p>Siparişte bulunan ürünler: </p>
-                <div>
+                <p><strong>Müşteri numarası: </strong>{item.userId}</p>
+                <p><strong>Siparişte bulunan ürünler:</strong> </p>
+                <div className="grid grid-cols-2">
                   {item.products.map((product, idx) => (
                     <div className="border mb-5 p-8">
-                      <p>Adet: {product.quantity}</p>
+                      <p><strong>Adet:</strong> {product.quantity}</p>
                       <p
                         className="w-5 h-5"
                         style={{ backgroundColor: `${product.color}` }}
                       ></p>
-                      <p>Boyut: {product.size}</p>
-                      <img className="w-96" src={product.image} alt={idx} />
-                      <p>Ürün başlığı: {product.title}</p>
-                      <p>Ürün açıklaması: {product.description}</p>
-                      <p>Ürün fiyatı: {product.price}$</p>
-                      <p>Ürün numarası: {product._id}</p>
+                      <p><strong>Boyut:</strong> {product.size}</p>
+                      <img className="w-80 h-80 object-contain" src={product.image} alt={idx} />
+                      <p><strong>Ürün başlığı:</strong> {product.title}</p>
+                      <p><strong>Ürün açıklaması: </strong>{product.description}</p>
+                      <p><strong>Ürün fiyatı: </strong>{product.price}$</p>
+                      <p><strong>Ürün numarası: </strong>{product._id}</p>
                     </div>
                   ))}
                 </div>
-                <p>Toplam yapılan ödeme: {item.totalPrice}$</p>
-                <p>Sipariş tarihi: {item.createdAt}</p>
-                <p>Kullanıcı adres bilgileri:</p>
+                <p><strong>Toplam yapılan ödeme: </strong>{item.totalPrice}$</p>
+                <p><strong>Sipariş tarihi: </strong>{item.createdAt}</p>
+                <p><strong>Kullanıcı adres bilgileri:</strong></p>
 
                 <div>
-                  <p>Kullanıcı adı: {item.address.name}</p>
-                  <p>Kullanıcı soy adı: {item.address.surname}</p>
-                  <p>Kullanıcı eposta adresi: {item.address.email}</p>
-                  <p>Kullanıcı telefon numarası: {item.address.phone}</p>
-                  <p>Kullanıcı adresi: {item.address.address}</p>
+                  <p><strong>Kullanıcı adı: </strong>{item.address.name}</p>
+                  <p><strong>Kullanıcı soy adı: </strong>{item.address.surname}</p>
+                  <p><strong>Kullanıcı eposta adresi: </strong>{item.address.email}</p>
+                  <p><strong>Kullanıcı telefon numarası: </strong>{item.address.phone}</p>
+                  <p><strong>Kullanıcı adresi: </strong>{item.address.address}</p>
                 </div>
               </li>
             </div>

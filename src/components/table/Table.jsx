@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const List = ({ messages, loading}) => {
+const List = ({ messages, loading }) => {
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -36,9 +36,7 @@ const List = ({ messages, loading}) => {
                 <TableCell className="tableCell">{row.name}</TableCell>
                 <TableCell className="tableCell">{row.surname}</TableCell>
                 <TableCell className="tableCell">{row.email}</TableCell>
-                <TableCell className="tableCell truncate max-w-[1rem]">
-                  {row.message}
-                </TableCell>
+                <TableCell className="tableCell">{row.message}</TableCell>
               </TableRow>
             ))
           )}
